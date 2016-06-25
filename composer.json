@@ -1,0 +1,25 @@
+{
+    "name": "phlak/semver-cli",
+    "description": "CLI app for managing semantic versioning within a project",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Kankiewicz",
+            "email": "Chris@ChrisKankiewicz.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "symfony/console": "^3.1",
+        "phlak/semver": "^0.1.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "SemVerCli\\": "src/"
+        }
+    }
+}
