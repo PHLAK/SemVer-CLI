@@ -3,16 +3,10 @@
 namespace SemVerCli\Commands;
 
 use SemVer\SemVer;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class InitCommand extends Command {
-
-    /** @var array Default semantic version data array */
-    protected $semverFile = '.semver';
+class InitCommand extends BaseCommand {
 
     protected function configure() {
         $this->setName('init');

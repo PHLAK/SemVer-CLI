@@ -3,16 +3,11 @@
 namespace SemVerCli\Commands;
 
 use SemVer\SemVer;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Exception\InvalidArgumentException;
-use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
-class GetCommand extends Command {
+class GetCommand extends BaseCommand {
 
     public function configure() {
         $this->setName('get');
@@ -25,22 +20,9 @@ class GetCommand extends Command {
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-
-        if (! $contents = @file_get_contents('.semver')) {
-            throw new RuntimeException('Semantic versioning not intialized in this directory');
-        }
-
-        $semver = unserialize($contents);
-
-        $property = $input->getArgument('property');
-
-        $method = 'get' . implode('', array_map('ucfirst', explode('-', $property)));
-        if (! method_exists($semver, $method)) {
-            throw new InvalidArgumentException('Property "' . $property . '" is not defined');
-        }
-
+        $semver = $this->readVersionFromDisk();
+        $method = $this->getMethodFromProperty('get', $input->getArgument('property'));
         $output->writeln($semver->{$method}());
-
     }
 
 }
