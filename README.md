@@ -17,19 +17,51 @@ More info coming soon...
 Requirements
 ------------
 
-  - [PHP](https://php.net) >= 5.4
+  - [PHP](https://php.net) >= 7.2
 
 Install with Composer
 ---------------------
 
-```bash
-composer global require phlak/semver-cli
-```
+### Per-project
+
+    composer require phlak/semver-cli
+
+> ℹ️ It is recommended to add `vendor/bin` to your `PATH` environment variable
+> when installing within a project. Otherwise you will have to call the command 
+> with a relative path (i.e. `vendor/bin/semver`) every time.
+
+### Global
+
+    composer global require phlak/semver-cli
+
+> ℹ️ You should add `${COMOPSER_HOME}/vendor/bin` to your `PATH` environment
+> variable when installing globally. If you don't you will have to specify the 
+> full installation path with every call call.
 
 Usage
 -----
 
-More info coming soon...
+    semver init
+
+    semver set:version
+    semver set:major
+    semver set:minor
+    semver set:patch
+    semver set:pre-release
+    semver set:build
+
+    semver get:version
+    semver get:major
+    semver get:minor
+    semver get:patch
+    semver get:pre-release
+    semver get:build
+
+    semver increment:major
+    semver increment:minor
+    semver increment:patch
+
+    ...
 
 Troubleshooting
 ---------------

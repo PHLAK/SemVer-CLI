@@ -1,15 +1,28 @@
-sudo: false
-
+os: linux
+dist: focal
 language: php
+
+env:
+  - PATH="vendor/bin:${PATH}"
+
 php:
-    - 5.4
-    - 5.5
-    - 5.6
-    - 7.0
+  - 7.2
+  - 7.3
+  - 7.4
+  - nightly
+
+jobs:
+  allow_failures:
+    - php: nightly
 
 cache:
-    directories:
-        - $HOME/.composer/cache
-        - vendor
+  directories:
+    - $HOME/.composer/cache
+    - vendor
 
-install: composer install
+install: composer install --no-suggest
+
+script:
+  - php-cs-fixer fix --diff --dry-run
+  - psalm --show-info=true
+  - phpunit --coverage-text
