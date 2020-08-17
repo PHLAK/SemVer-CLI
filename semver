@@ -42,4 +42,8 @@ $app->addCommands([
     new Commands\Increment\Patch,
 ]);
 
+$app->getDefinition()->addOption(
+    new InputOption('file', 'f', InputOption::VALUE_REQUIRED, 'Name of the version file', 'VERSION')
+);
+
 $app->run();
