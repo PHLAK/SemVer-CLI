@@ -1,10 +1,18 @@
 #!/usr/bin/env php
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
-
 use SemVerCli\Commands;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputOption;
+
+for ($level = 0; $level <= 4; $level++) {
+    $path = $level === 0 ? __DIR__ : dirname(__DIR__, $level);
+
+    if (is_readable($autoloader = $path . '/vendor/autoload.php')) {
+        require $autoloader;
+        break;
+    }
+}
 
 $app = new Application('Semantic versioning helper', '0.1.0');
 
