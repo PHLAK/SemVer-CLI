@@ -1,6 +1,7 @@
 <?php
 
 use SemVerCli\Commands\BaseCommand;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\TestCase;
 
@@ -80,10 +81,10 @@ class GetTest extends TestCase
         $command->execute(['value' => '1.3.37']);
 
         $command = new CommandTester($this->app->find('get:pre-release'));
-        $command->execute(['--verbose' => true]);
+        $command->execute([], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
         $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
-        $this->assertEquals(PHP_EOL, $command->getDisplay());
+        $this->assertEquals('The pre-release value is not set' . PHP_EOL, $command->getDisplay());
     }
 
     public function test_it_can_get_the_build_property(): void
@@ -112,9 +113,9 @@ class GetTest extends TestCase
         $command->execute(['value' => '1.3.37']);
 
         $command = new CommandTester($this->app->find('get:build'));
-        $command->execute(['--verbose' => true]);
+        $command->execute([], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
         $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
-        $this->assertEquals(PHP_EOL, $command->getDisplay());
+        $this->assertEquals('The build value is not set' . PHP_EOL, $command->getDisplay());
     }
 }
