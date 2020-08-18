@@ -74,9 +74,9 @@ Sometimes you may need to initialize with an incomplete version. By default the 
 
 ### Custom Version File
 
-You can also control the file in which the commands read and write the version to. This is accomplished via the `--file` option. This option can be passed with any command.
+You can also control the file to which the commands read and write the version via the `--file` option. This option takes the name you'd like to use for the file and can be passed along with any command.
 
-    semver --file .version initialize
+    $ semver --file .version initialize
 
 ---
 
@@ -84,13 +84,13 @@ You can also control the file in which the commands read and write the version t
 
 You can set the complete version with the `set:version` command.
 
-    semver set:version 1.3.37
+    $ semver set:version 1.3.37
 
 Alternately, you may set individual values.
 
-    semver set:major
-    semver set:minor
-    semver set:patch
+    $ semver set:major
+    $ semver set:minor
+    $ semver set:patch
 
 > ℹ️ Setting the `major` value will reset the `minor` and `patch` values to `0` and clear the `pre-release` and `build` values.
 
@@ -101,6 +101,8 @@ Alternately, you may set individual values.
     semver set:pre-release
     semver set:build
 
+### Clearing Pre-release and Build Values
+
 You may clear the `pre-release` or `build` values with the `clear:*` commands.
 
     clear:build
@@ -110,17 +112,17 @@ You may clear the `pre-release` or `build` values with the `clear:*` commands.
 
 ### Retrieving Values
 
-Get the full version.
+At any point after initialization you may get the full version.
 
     $ semver get:version
     1.3.37
 
-You may also get the version prefixed with `v` with the `--prefix`option.
+To get the version prefixed with `v` use the `--prefix` option.
     
     $ semver get:version --prefix
     v1.3.37
 
-Or retrieve individual values.
+You may also retrieve individual values.
 
     $ semver get:major
     1
@@ -131,8 +133,13 @@ Or retrieve individual values.
     $ semver get:patch
     37
 
-You may also retrieve the `pre-release` and `build` values. However, since these values can be empty they may return nothing. When the values are empty the exit code will return `201`. 
+    $ semver get:prerelease
+    beta.5
 
+    $semver get:build
+    007
+
+> ℹ️ The `pre-release` and `build` values can be empty (`null`). If so they will return nothing by default with an exit code of `201`. 
 
     $ semver get:pre-release
     $ echo $?
@@ -142,7 +149,7 @@ You may also retrieve the `pre-release` and `build` values. However, since these
     $ echo $?
     201
 
-If necessary you can get additional output by increasing verbosity.
+You can get additional output by increasing verbosity if necessary.
 
     $ semver get:pre-release --verbose
     The pre-release value is not set
@@ -154,12 +161,31 @@ If necessary you can get additional output by increasing verbosity.
 
 ### Incrementing the Version
 
-    semver increment:major
-    semver increment:minor
-    semver increment:patch
+    $ semver increment:major
+    $ semver increment:minor
+    $ semver increment:patch
+
+> ℹ️ Incrementing the `major` value will reset the `minor` and `patch` values to `0` and clear the `pre-release` and `build` values.
+
+> ℹ️ Incrementing the `minor` value will reset the `patch` value to `0` and clear the `pre-release` and `build` values.
+
+> ℹ️ Incrementing the `patch` value will clear the `pre-release` and `build` values.
+
+Configuration
+-------------
+
+Coming soon...
+
+Changelog
+---------
+
+A list of changes can be found on the [GitHub Releases](https://github.com/PHLAK/SemVer-CLI/releases) page.
+
 
 Troubleshooting
 ---------------
+
+For general help and support join our [Spectrum Community](https://spectrum.chat/directory-lister) or reach out on [Twitter](https://twitter.com/DirectoryLister).
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/SemVer-CLI/issues).
 
