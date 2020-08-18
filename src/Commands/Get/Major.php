@@ -17,9 +17,9 @@ class Major extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $semver = $this->readVersionFromDisk();
+        $version = $this->readVersionFromDisk($input);
 
-        $output->writeln($semver->major);
+        $output->writeln($version->major);
 
         return Command::SUCCESS;
     }

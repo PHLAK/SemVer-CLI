@@ -19,11 +19,11 @@ class Major extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $semver = $this->readVersionFromDisk();
-        $this->writeVersionToDisk($semver->setMajor($input->getArgument('value')));
+        $version = $this->readVersionFromDisk($input);
+        $this->writeVersionToDisk($input, $version->setMajor($input->getArgument('value')));
 
         $output->writeln(
-            sprintf('Version set to <info>%s</info>', $semver->prefix(''))
+            sprintf('Version set to <info>%s</info>', (string) $version)
         );
 
         return Command::SUCCESS;

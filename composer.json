@@ -24,8 +24,9 @@
     },
     "require": {
         "php": ">=7.2",
-        "symfony/console": "^5.0",
-        "phlak/semver": "^3.2"
+        "phlak/semver": "^3.2",
+        "php-di/php-di": "^6.2",
+        "symfony/console": "^5.0"
     },
     "require-dev": {
         "php": ">=7.4",

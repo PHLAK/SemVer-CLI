@@ -17,9 +17,9 @@ class Patch extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $semver = $this->readVersionFromDisk();
+        $version = $this->readVersionFromDisk($input);
 
-        $output->writeln($semver->patch);
+        $output->writeln($version->patch);
 
         return Command::SUCCESS;
     }

@@ -17,9 +17,15 @@ class Build extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $semver = $this->readVersionFromDisk();
+        $version = $this->readVersionFromDisk($input);
 
-        $output->writeln($semver->build);
+        if ($version->build === null) {
+            $output->writeln('<comment>The build value is not set</comment>');
+
+            return self::VALUE_NOT_SET;
+        }
+
+        $output->writeln($version->build);
 
         return Command::SUCCESS;
     }

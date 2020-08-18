@@ -17,9 +17,15 @@ class PreRelease extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $semver = $this->readVersionFromDisk();
+        $version = $this->readVersionFromDisk($input);
 
-        $output->writeln($semver->preRelease);
+        if ($version->preRelease === null) {
+            $output->writeln('<comment>The pre-release value is not set</comment>');
+
+            return self::VALUE_NOT_SET;
+        }
+
+        $output->writeln($version->preRelease);
 
         return Command::SUCCESS;
     }

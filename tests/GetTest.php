@@ -1,5 +1,6 @@
 <?php
 
+use SemVerCli\Commands\BaseCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\TestCase;
 
@@ -61,11 +62,35 @@ class GetTest extends TestCase
         $this->assertEquals('beta.5' . PHP_EOL, $command->getDisplay());
     }
 
+    public function test_it_can_get_the_pre_release_property_when_null(): void
+    {
+        $command = new CommandTester($this->app->find('set:version'));
+        $command->execute(['value' => '1.3.37']);
+
+        $command = new CommandTester($this->app->find('get:pre-release'));
+        $command->execute([]);
+
+        $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
+        $this->assertEquals('The pre-release value is not set' . PHP_EOL, $command->getDisplay());
+    }
+
     public function test_it_can_get_the_build_property(): void
     {
         $command = new CommandTester($this->app->find('get:build'));
         $command->execute([]);
 
         $this->assertEquals('007' . PHP_EOL, $command->getDisplay());
+    }
+
+    public function test_it_can_get_the_build_property_when_null(): void
+    {
+        $command = new CommandTester($this->app->find('set:version'));
+        $command->execute(['value' => '1.3.37']);
+
+        $command = new CommandTester($this->app->find('get:build'));
+        $command->execute([]);
+
+        $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
+        $this->assertEquals('The build value is not set' . PHP_EOL, $command->getDisplay());
     }
 }

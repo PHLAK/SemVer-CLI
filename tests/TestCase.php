@@ -2,9 +2,9 @@
 
 namespace Tests;
 
+use DI\ContainerBuilder;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
-use SemVerCli\Commands;
-use SemVerCli\Commands\BaseCommand;
+use SemVerCli\Bootstrap\AppManager;
 use Symfony\Component\Console\Application;
 
 class TestCase extends PHPUnitTestCase
@@ -17,36 +17,21 @@ class TestCase extends PHPUnitTestCase
     {
         chdir(self::DATA_DIR);
 
+        $this->container = (new ContainerBuilder)->addDefinitions(
+            ...glob(dirname(__DIR__) . '/config/*.php')
+        )->build();
+
         $this->app = new Application('Semantic versioning helper', 'TEST');
 
-        $this->app->add(new Commands\Initialize);
-
-        $this->app->addCommands([
-            // Set
-            new Commands\Set\Version,
-            new Commands\Set\Major,
-            new Commands\Set\Minor,
-            new Commands\Set\Patch,
-            new Commands\Set\PreRelease,
-            new Commands\Set\Build,
-
-            // Get
-            new Commands\Get\Version,
-            new Commands\Get\Major,
-            new Commands\Get\Minor,
-            new Commands\Get\Patch,
-            new Commands\Get\PreRelease,
-            new Commands\Get\Build,
-
-            // Increment
-            new Commands\Increment\Major,
-            new Commands\Increment\Minor,
-            new Commands\Increment\Patch,
-        ]);
+        (new AppManager($this->container, $this->app))();
     }
 
     public function tearDown(): void
     {
-        unlink(sprintf('%s/%s', self::DATA_DIR, BaseCommand::VERSION_FILE));
+        $versionFilePath = sprintf('%s/%s', self::DATA_DIR, 'VERSION');
+
+        if (file_exists($versionFilePath)) {
+            unlink($versionFilePath);
+        }
     }
 }

@@ -17,8 +17,8 @@ class Major extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $version = $this->readVersionFromDisk();
-        $this->writeVersionToDisk($version->incrementMajor());
+        $version = $this->readVersionFromDisk($input);
+        $this->writeVersionToDisk($input, $version->incrementMajor());
 
         $output->writeln(
             sprintf('Semantic version incremented to <info>%s</info>', (string) $version)

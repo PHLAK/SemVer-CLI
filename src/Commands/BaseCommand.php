@@ -5,24 +5,25 @@ namespace SemVerCli\Commands;
 use PHLAK\SemVer\Version;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
+use Symfony\Component\Console\Input\InputInterface;
 
 abstract class BaseCommand extends Command
 {
-    /** @const Semantic version data file */
-    public const VERSION_FILE = 'VERSION';
+    public const PREVIOUSLY_INITIALIZED = 200;
+    public const VALUE_NOT_SET = 201;
 
     /**
      * Get the SemVer object from the data file.
      *
      * @throws RuntimeException
      */
-    protected function readVersionFromDisk(): Version
+    protected function readVersionFromDisk(InputInterface $input): Version
     {
-        if (! $contents = file_get_contents(self::VERSION_FILE)) {
+        if (! $contents = @file_get_contents($input->getOption('file'))) {
             throw new RuntimeException('Semantic versioning not intialized in this directory');
         }
 
-        return unserialize($contents);
+        return new Version($contents);
     }
 
     /**
@@ -30,9 +31,9 @@ abstract class BaseCommand extends Command
      *
      * @throws RuntimeException
      */
-    protected function writeVersionToDisk(Version $version): void
+    protected function writeVersionToDisk(InputInterface $input, Version $version): void
     {
-        if (file_put_contents(self::VERSION_FILE, serialize($version), LOCK_EX) === false) {
+        if (file_put_contents($input->getOption('file'), (string) $version, LOCK_EX) === false) {
             throw new RuntimeException('Failed to write data to disk');
         }
     }

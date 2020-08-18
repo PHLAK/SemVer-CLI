@@ -1,9 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-use SemVerCli\Commands;
-use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Input\InputOption;
+use DI\ContainerBuilder;
+use SemVerCli\Bootstrap\AppManager;
 
 for ($level = 0; $level <= 4; $level++) {
     $path = $level === 0 ? __DIR__ : dirname(__DIR__, $level);
@@ -14,36 +13,13 @@ for ($level = 0; $level <= 4; $level++) {
     }
 }
 
-$app = new Application('Semantic versioning helper', '0.1.0');
+// Initialize the container
+$container = (new ContainerBuilder)->addDefinitions(
+    ...glob(__DIR__ . '/config/*.php')
+)->build();
 
-$app->addCommands([
-    // Initialize
-    new Commands\Initialize,
+// Initialize the application
+$app = $container->call(AppManager::class);
 
-    // Set
-    new Commands\Set\Version,
-    new Commands\Set\Major,
-    new Commands\Set\Minor,
-    new Commands\Set\Patch,
-    new Commands\Set\PreRelease,
-    new Commands\Set\Build,
-
-    // Get
-    new Commands\Get\Version,
-    new Commands\Get\Major,
-    new Commands\Get\Minor,
-    new Commands\Get\Patch,
-    new Commands\Get\PreRelease,
-    new Commands\Get\Build,
-
-    // Increment
-    new Commands\Increment\Major,
-    new Commands\Increment\Minor,
-    new Commands\Increment\Patch,
-]);
-
-$app->getDefinition()->addOption(
-    new InputOption('file', 'f', InputOption::VALUE_REQUIRED, 'Name of the version file', 'VERSION')
-);
-
+// Engage!
 $app->run();

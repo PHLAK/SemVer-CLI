@@ -19,10 +19,10 @@ class Version extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $semver = $this->readVersionFromDisk();
+        $version = $this->readVersionFromDisk($input);
 
         $output->writeln(
-            $semver->prefix($input->getOption('prefix') ? 'v' : '')
+            $input->getOption('prefix') ? $version->prefix() : (string) $version
         );
 
         return Command::SUCCESS;

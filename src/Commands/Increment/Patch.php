@@ -17,8 +17,8 @@ class Patch extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $version = $this->readVersionFromDisk();
-        $this->writeVersionToDisk($version->incrementPatch());
+        $version = $this->readVersionFromDisk($input);
+        $this->writeVersionToDisk($input, $version->incrementPatch());
 
         $output->writeln(
             sprintf('Semantic version incremented to <info>%s</info>', (string) $version)
