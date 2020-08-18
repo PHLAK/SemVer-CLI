@@ -19,7 +19,7 @@ class Minor extends BaseCommand
     {
         $version = $this->readVersionFromDisk($input);
 
-        $output->writeln($version->minor);
+        $output->writeln((string) $version->minor);
 
         return Command::SUCCESS;
     }

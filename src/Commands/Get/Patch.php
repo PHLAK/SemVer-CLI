@@ -19,7 +19,7 @@ class Patch extends BaseCommand
     {
         $version = $this->readVersionFromDisk($input);
 
-        $output->writeln($version->patch);
+        $output->writeln((string) $version->patch);
 
         return Command::SUCCESS;
     }

@@ -19,7 +19,7 @@ class Major extends BaseCommand
     {
         $version = $this->readVersionFromDisk($input);
 
-        $output->writeln($version->major);
+        $output->writeln((string) $version->major);
 
         return Command::SUCCESS;
     }
