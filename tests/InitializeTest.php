@@ -12,7 +12,7 @@ class InitializeTest extends TestCase
         $command->execute([]);
 
         $this->assertStringContainsString(
-            'Semantic versioning initialized, version set to 0.1.0',
+            'Semantic versioning initialized to 0.1.0',
             $command->getDisplay()
         );
     }
@@ -23,7 +23,7 @@ class InitializeTest extends TestCase
         $command->execute([]);
 
         $this->assertEquals(
-            'Semantic versioning initialized, version set to 0.1.0' . PHP_EOL,
+            'Semantic versioning initialized to 0.1.0' . PHP_EOL,
             $command->getDisplay()
         );
     }
@@ -34,7 +34,7 @@ class InitializeTest extends TestCase
         $command->execute(['version' => '1.3.37']);
 
         $this->assertEquals(
-            'Semantic versioning initialized, version set to 1.3.37' . PHP_EOL,
+            'Semantic versioning initialized to 1.3.37' . PHP_EOL,
             $command->getDisplay()
         );
     }
@@ -57,7 +57,7 @@ class InitializeTest extends TestCase
         $command->execute(['--parse' => true, 'version' => '1.2']);
 
         $this->assertEquals(
-            'Semantic versioning initialized, version set to 1.2.0' . PHP_EOL,
+            'Semantic versioning initialized to 1.2.0' . PHP_EOL,
             $command->getDisplay()
         );
     }

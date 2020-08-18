@@ -43,7 +43,7 @@ class Initialize extends BaseCommand
         $this->writeVersionToDisk($input, $version);
 
         $output->writeln(
-            sprintf('Semantic versioning initialized, version set to <info>%s</info>', (string) $version)
+            sprintf('Semantic versioning initialized to <info>%s</info>', (string) $version)
         );
 
         return Command::SUCCESS;
