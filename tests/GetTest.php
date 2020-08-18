@@ -71,7 +71,19 @@ class GetTest extends TestCase
         $command->execute([]);
 
         $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
-        $this->assertEquals('The pre-release value is not set' . PHP_EOL, $command->getDisplay());
+        $this->assertEmpty($command->getDisplay());
+    }
+
+    public function test_it_can_get_the_pre_release_property_when_null_with_verbose_output(): void
+    {
+        $command = new CommandTester($this->app->find('set:version'));
+        $command->execute(['value' => '1.3.37']);
+
+        $command = new CommandTester($this->app->find('get:pre-release'));
+        $command->execute(['--verbose' => true]);
+
+        $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
+        $this->assertEquals(PHP_EOL, $command->getDisplay());
     }
 
     public function test_it_can_get_the_build_property(): void
@@ -91,6 +103,18 @@ class GetTest extends TestCase
         $command->execute([]);
 
         $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
-        $this->assertEquals('The build value is not set' . PHP_EOL, $command->getDisplay());
+        $this->assertEmpty($command->getDisplay());
+    }
+
+    public function test_it_can_get_the_build_property_when_null_with_verbose_output(): void
+    {
+        $command = new CommandTester($this->app->find('set:version'));
+        $command->execute(['value' => '1.3.37']);
+
+        $command = new CommandTester($this->app->find('get:build'));
+        $command->execute(['--verbose' => true]);
+
+        $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
+        $this->assertEquals(PHP_EOL, $command->getDisplay());
     }
 }

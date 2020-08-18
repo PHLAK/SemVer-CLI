@@ -20,7 +20,9 @@ class Build extends BaseCommand
         $version = $this->readVersionFromDisk($input);
 
         if ($version->build === null) {
-            $output->writeln('<comment>The build value is not set</comment>');
+            if ($output->isVerbose()) {
+                $output->writeln('<comment>The build value is not set</comment>');
+            }
 
             return self::VALUE_NOT_SET;
         }

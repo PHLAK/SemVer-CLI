@@ -20,7 +20,9 @@ class PreRelease extends BaseCommand
         $version = $this->readVersionFromDisk($input);
 
         if ($version->preRelease === null) {
-            $output->writeln('<comment>The pre-release value is not set</comment>');
+            if ($output->isVerbose()) {
+                $output->writeln('<comment>The pre-release value is not set</comment>');
+            }
 
             return self::VALUE_NOT_SET;
         }
