@@ -24,152 +24,118 @@ Requirements
 
   - [PHP](https://php.net) >= 7.2
 
-Install with Composer
----------------------
+Installation
+------------
 
-### Per-project
+The SemVer CLI can be installed via [Composer](https://getcomposer.org) per-project or globally.
+
+#### Per-project
 
     composer require phlak/semver-cli
 
-> ℹ️ It is recommended to add `vendor/bin` to your `PATH` environment variable
-> when installing within a project. Otherwise you will have to call the command 
-> with a relative path (i.e. `vendor/bin/semver`) every time.
+When required in a projcet the `semver` tool installed to the project's `vendor/bin` directory.
 
-### Global
+> ℹ️ It is recommended to add `vendor/bin` to your `PATH` environment variable when installing within a project. Otherwise you will have to call the command with a relative path (i.e. `vendor/bin/semver [arguments]`) every time.
+
+#### Globally
 
     composer global require phlak/semver-cli
 
-> ℹ️ You should add `${COMOPSER_HOME}/vendor/bin` to your `PATH` environment
-> variable when installing globally. If you don't you will have to specify the 
-> full installation path with every call call.
+When required globally the `semver` tool will be installed to the global `${COMOPSER_HOME}/vendor/bin` directory.
+
+> ℹ️ You should add `${COMOPSER_HOME}/vendor/bin` to your `PATH` environment variable when installing globally. If you don't you will have to specify the full installation path with every call call.
 
 Usage
 -----
 
-### Initialization
+#### Initialization
 
 To begin, you must initialize semantic versioning within a directory.
 
     $ semver initialize
-    Semantic versioning initialized to 0.1.0
 
-This initializes the version to `0.1.0` by creating a `VERSION` file containing the version in the current directory. 
+This initializes the version to `0.1.0` by creating a `VERSION` file containing the version in the current directory.
 
-### Initialize a Specific Version
+#### Initialize a Specific Version
 
 To initialize to a specific version, pass the version as an argument to the `initialize` command.
 
     $ semver initialize 1.3.37
-    Semantic versioning initialized to 1.3.37
 
-### Parsing Incomplete Versions
+#### Initializing Incomplete Versions
 
-Sometimes you may need to initialize with an incomplete version. By default the `initialize` command requires a valid semantic version string. If you want to allow the command to make a "best guess" attempt you can do so with the `--parse` option.
-
-    $ semver initialize 1.2
-    Failed to initialize, invalid semantic version string provided
+Sometimes you may need to initialize semantic versioning with an incomplete version. By default the `initialize` command requires a valid semantic version string. If you want to allow the command to make a "best guess" attempt you can do so with the `--parse` option.
 
     $ semver initialize --parse 1.2
-    Semantic versioning initialized to 1.2.0
 
-### Custom Version File
+#### Setting Version Values
 
-You can also control the file to which the commands read and write the version via the `--file` option. This option takes the name you'd like to use for the file and can be passed along with any command.
-
-    $ semver --file .version initialize
-
----
-
-### Setting the Version
-
-You can set the complete version with the `set:version` command.
+After initialization you can set (override) the complete version with the `set:version` command.
 
     $ semver set:version 1.3.37
 
 Alternately, you may set individual values.
 
-    $ semver set:major
-    $ semver set:minor
-    $ semver set:patch
+    $ semver set:major 1
+    $ semver set:minor 3
+    $ semver set:patch 37
+    $ semver set:pre-release beta.5
+    $ semver set:build 007
 
-> ℹ️ Setting the `major` value will reset the `minor` and `patch` values to `0` and clear the `pre-release` and `build` values.
+> ℹ️ Setting certain values may affect other values
+>   - Setting the `major` value will reset the `minor` and `patch` values to `0`.
+>   - Setting the `minor` value will only reset the `patch` value to `0`
+>   - Setting the the `major`, `minor` or `patch` value will also clear the `pre-release` and `build` values
 
-> ℹ️ Setting the `minor` value will reset the `patch` value to `0` and clear the `pre-release` and `build` values.
+#### Clearing Values
 
-> ℹ️ Setting the `patch` value will clear the `pre-release` and `build` values.
+You may clear the `pre-release` or `build` values with the `clear` commands.
 
-    semver set:pre-release
-    semver set:build
+    $ clear:build
+    $ clear:pre-release
 
-### Clearing Pre-release and Build Values
-
-You may clear the `pre-release` or `build` values with the `clear:*` commands.
-
-    clear:build
-    clear:pre-release
-
----
-
-### Retrieving Values
+#### Retrieving Values
 
 At any point after initialization you may get the full version.
 
     $ semver get:version
-    1.3.37
 
-To get the version prefixed with `v` use the `--prefix` option.
+To get the version prefixed with `v` (i.e. `v1.3.37`) use the `--prefix` option.
     
     $ semver get:version --prefix
-    v1.3.37
 
 You may also retrieve individual values.
 
     $ semver get:major
-    1
-
     $ semver get:minor
-    3
-
     $ semver get:patch
-    37
-
-    $ semver get:prerelease
-    beta.5
-
-    $semver get:build
-    007
-
-> ℹ️ The `pre-release` and `build` values can be empty (`null`). If so they will return nothing by default with an exit code of `201`. 
-
     $ semver get:pre-release
-    $ echo $?
-    201
-
     $ semver get:build
-    $ echo $?
-    201
 
-You can get additional output by increasing verbosity if necessary.
+If the `pre-release` and `build` values are unset they will return no output by default and have an exit code of `201`. To force output add the `--verbose` option.
 
     $ semver get:pre-release --verbose
-    The pre-release value is not set
-
     $ semver get:build --verbose
-    The build value is not set
 
----
+#### Incrementing the Version
 
-### Incrementing the Version
+You can increment the version values with the `increment` command.
 
     $ semver increment:major
     $ semver increment:minor
     $ semver increment:patch
 
-> ℹ️ Incrementing the `major` value will reset the `minor` and `patch` values to `0` and clear the `pre-release` and `build` values.
+> ℹ️ Incrementing certain values may affect other values
+>   - Incrementing the `major` value will reset the `minor` and `patch` values to `0`
+>   - Incrementing the `minor` value will only reset the `patch` value to `0`
+>   - Incrementing the `major`, `minor` or `patch` value will also clear the `pre-release` and `build` values
 
-> ℹ️ Incrementing the `minor` value will reset the `patch` value to `0` and clear the `pre-release` and `build` values.
+#### Global Options
 
-> ℹ️ Incrementing the `patch` value will clear the `pre-release` and `build` values.
+You can control the file to which the commands read and write the version via the `--file` option. This option takes the name you'd like to use for the file and can be passed along with any command.
+
+    $ semver --file .version initialize
+    $ semver --file .version get:version
 
 Configuration
 -------------
@@ -181,11 +147,10 @@ Changelog
 
 A list of changes can be found on the [GitHub Releases](https://github.com/PHLAK/SemVer-CLI/releases) page.
 
-
 Troubleshooting
 ---------------
 
-For general help and support join our [Spectrum Community](https://spectrum.chat/directory-lister) or reach out on [Twitter](https://twitter.com/DirectoryLister).
+For general help and support join our [Spectrum Community](https://spectrum.chat/phlaknet) or reach out on [Twitter](https://twitter.com/PHLAK).
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/SemVer-CLI/issues).
 
