@@ -8,8 +8,8 @@ SemVer-CLI
     <br>
     <a href="https://packagist.org/packages/PHLAK/SemVer-CLI"><img src="https://img.shields.io/packagist/v/PHLAK/SemVer-CLI.svg?style=flat-square" alt="Latest Stable Version"></a>
     <a href="https://packagist.org/packages/PHLAK/SemVer-CLI"><img src="https://img.shields.io/packagist/dt/PHLAK/SemVer-CLI.svg?style=flat-square" alt="Total Downloads"></a>
-    <a href="https://packagist.org/packages/PHLAK/SemVer-CLI"><img src="https://img.shields.io/packagist/l/PHLAK/SemVer-CLI.svg?style=flat-square" alt="License"></a>
-    <a href="https://travis-ci.org/PHLAK/SemVer-CLI"><img src="https://img.shields.io/travis/PHLAK/SemVer-CLI.svg?style=flat-square" alt="Build Status"></a>
+    <a href="https://github.com/PHLAK/SemVer-CLI/blob/master/LICENSE"><img src="https://img.shields.io/github/license/PHLAK/SemVer-CLI.svg?style=flat-square" alt="License"></a>
+    <a href="https://travis-ci.com/PHLAK/SemVer-CLI"><img src="https://img.shields.io/travis/com/PHLAK/SemVer-CLI.svg?style=flat-square" alt="Build Status"></a>
     <a href="https://styleci.io/repos/61960030"><img src="https://styleci.io/repos/61960030/shield?branch=master&style=flat-square" alt="StyleCI"></a>
 </p>
 
