@@ -27,23 +27,30 @@ Requirements
 Installation
 ------------
 
-The SemVer CLI can be installed via [Composer](https://getcomposer.org) per-project or globally.
+The SemVer CLI can be installed via [Composer](https://getcomposer.org) 
+per-project or globally.
 
 #### Per-project
 
     composer require phlak/semver-cli
 
-When required in a projcet the `semver` tool installed to the project's `vendor/bin` directory.
+When required in a projcet the `semver` tool installed to the project's 
+`vendor/bin` directory.
 
-> ℹ️ It is recommended to add `vendor/bin` to your `PATH` environment variable when installing within a project. Otherwise you will have to call the command with a relative path (i.e. `vendor/bin/semver [arguments]`) every time.
+> ℹ️ It is recommended to add `vendor/bin` to your `PATH` environment variable 
+> when installing within a project. Otherwise you will have to call the command 
+> with a relative path (i.e. `vendor/bin/semver [arguments]`) every time.
 
 #### Globally
 
     composer global require phlak/semver-cli
 
-When required globally the `semver` tool will be installed to the global `${COMOPSER_HOME}/vendor/bin` directory.
+When required globally the `semver` tool will be installed to the global 
+`${COMOPSER_HOME}/vendor/bin` directory.
 
-> ℹ️ You should add `${COMOPSER_HOME}/vendor/bin` to your `PATH` environment variable when installing globally. If you don't you will have to specify the full installation path with every call call.
+> ℹ️ You should add `${COMOPSER_HOME}/vendor/bin` to your `PATH` environment 
+> variable when installing globally. If you don't you will have to specify the 
+> full installation path with every call call.
 
 Usage
 -----
@@ -54,23 +61,29 @@ To begin, you must initialize semantic versioning within a directory.
 
     $ semver initialize
 
-This initializes the version to `0.1.0` by creating a `VERSION` file containing the version in the current directory.
+This initializes the version to `0.1.0` by creating a `VERSION` file containing 
+the version in the current directory.
 
 #### Initialize a Specific Version
 
-To initialize to a specific version, pass the version as an argument to the `initialize` command.
+To initialize to a specific version, pass the version as an argument to the 
+`initialize` command.
 
     $ semver initialize 1.3.37
 
 #### Initializing Incomplete Versions
 
-Sometimes you may need to initialize semantic versioning with an incomplete version. By default the `initialize` command requires a valid semantic version string. If you want to allow the command to make a "best guess" attempt you can do so with the `--parse` option.
+Sometimes you may need to initialize semantic versioning with an incomplete 
+version. By default the `initialize` command requires a valid semantic version 
+string. If you want to allow the command to make a "best guess" attempt you can
+do so with the `--parse` option.
 
     $ semver initialize --parse 1.2
 
 #### Setting Version Values
 
-After initialization you can set (override) the complete version with the `set:version` command.
+After initialization you can set (override) the complete version with the 
+`set:version` command.
 
     $ semver set:version 1.3.37
 
@@ -85,7 +98,8 @@ Alternately, you may set individual values.
 > ℹ️ Setting certain values may affect other values
 >   - Setting the `major` value will reset the `minor` and `patch` values to `0`.
 >   - Setting the `minor` value will only reset the `patch` value to `0`
->   - Setting the the `major`, `minor` or `patch` value will also clear the `pre-release` and `build` values
+>   - Setting the the `major`, `minor` or `patch` value will also clear the 
+>     `pre-release` and `build` values
 
 #### Clearing Values
 
@@ -112,7 +126,8 @@ You may also retrieve individual values.
     $ semver get:pre-release
     $ semver get:build
 
-If the `pre-release` and `build` values are unset they will return no output by default and have an exit code of `201`. To force output add the `--verbose` option.
+If the `pre-release` and `build` values are unset they will return no output by
+default and have an exit code of `201`. To force output add the `--verbose` option.
 
     $ semver get:pre-release --verbose
     $ semver get:build --verbose
@@ -128,11 +143,14 @@ You can increment the version values with the `increment` command.
 > ℹ️ Incrementing certain values may affect other values
 >   - Incrementing the `major` value will reset the `minor` and `patch` values to `0`
 >   - Incrementing the `minor` value will only reset the `patch` value to `0`
->   - Incrementing the `major`, `minor` or `patch` value will also clear the `pre-release` and `build` values
+>   - Incrementing the `major`, `minor` or `patch` value will also clear the 
+>     `pre-release` and `build` values
 
 #### Global Options
 
-You can control the file to which the commands read and write the version via the `--file` option. This option takes the name you'd like to use for the file and can be passed along with any command.
+You can control the file to which the commands read and write the version via
+the `--file` option. This option takes the name you'd like to use for the file
+and can be passed along with any command.
 
     $ semver --file .version initialize
     $ semver --file .version get:version
@@ -150,7 +168,8 @@ A list of changes can be found on the [GitHub Releases](https://github.com/PHLAK
 Troubleshooting
 ---------------
 
-For general help and support join our [Spectrum Community](https://spectrum.chat/phlaknet) or reach out on [Twitter](https://twitter.com/PHLAK).
+For general help and support join our [Spectrum Community](https://spectrum.chat/phlaknet
+or reach out on [Twitter](https://twitter.com/PHLAK).
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/SemVer-CLI/issues).
 
