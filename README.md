@@ -14,7 +14,9 @@ SemVer-CLI
 </p>
 
 <p align="center">
-    Command line tool for managing <a href="http://semver.org">semantic versioning</a> for a project • Created by <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a> (<a href="https://twitter.com/PHLAK">@PHLAK</a>)
+    Command line tool for managing <a href="http://semver.org">semantic versioning</a> for a project
+    <br>
+    Created by <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a> (<a href="https://twitter.com/PHLAK">@PHLAK</a>)
 </p>
 
 ---
@@ -34,7 +36,7 @@ per-project or globally.
 
     composer require phlak/semver-cli
 
-When required in a projcet the `semver` tool installed to the project's 
+When installed to a projcet the `semver` tool is installed to the project's
 `vendor/bin` directory.
 
 > ℹ️ It is recommended to add `vendor/bin` to your `PATH` environment variable 
