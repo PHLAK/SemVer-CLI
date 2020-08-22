@@ -129,7 +129,7 @@ You may also retrieve individual values.
     $ semver get:build
 
 If the `pre-release` and `build` values are unset they will return no output by
-default and have an exit code of `201`. To force output add the `--verbose` option.
+default. To force output add the `--verbose` option.
 
     $ semver get:pre-release --verbose
     $ semver get:build --verbose

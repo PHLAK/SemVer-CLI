@@ -2,13 +2,15 @@
 
 namespace SemVerCli\Commands\Get;
 
-use SemVerCli\Commands\BaseCommand;
+use SemVerCli\Traits\ReadsVersion;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class PreRelease extends BaseCommand
+class PreRelease extends Command
 {
+    use ReadsVersion;
+
     protected function configure(): void
     {
         $this->setName('get:pre-release');
@@ -17,17 +19,17 @@ class PreRelease extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $version = $this->readVersionFromDisk($input);
+        $version = $this->readVersion($input);
 
-        if ($version->preRelease === null) {
-            if ($output->isVerbose()) {
-                $output->writeln('<comment>The pre-release value is not set</comment>');
-            }
-
-            return self::VALUE_NOT_SET;
+        if ($output->isVerbose()) {
+            $output->writeln(
+                sprintf('The pre-release value is <info>%s</info>', var_export($version->preRelease, true))
+            );
         }
 
-        $output->writeln($version->preRelease);
+        if ($version->preRelease !== null) {
+            $output->writeln($version->preRelease);
+        }
 
         return Command::SUCCESS;
     }

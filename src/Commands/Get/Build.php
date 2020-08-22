@@ -2,13 +2,15 @@
 
 namespace SemVerCli\Commands\Get;
 
-use SemVerCli\Commands\BaseCommand;
+use SemVerCli\Traits\ReadsVersion;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Build extends BaseCommand
+class Build extends Command
 {
+    use ReadsVersion;
+
     protected function configure(): void
     {
         $this->setName('get:build');
@@ -17,17 +19,17 @@ class Build extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $version = $this->readVersionFromDisk($input);
+        $version = $this->readVersion($input);
 
-        if ($version->build === null) {
-            if ($output->isVerbose()) {
-                $output->writeln('<comment>The build value is not set</comment>');
-            }
-
-            return self::VALUE_NOT_SET;
+        if ($output->isVerbose()) {
+            $output->writeln(
+                sprintf('The build value is <info>%s</info>', var_export($version->build, true))
+            );
         }
 
-        $output->writeln($version->build);
+        if ($version->build !== null) {
+            $output->writeln($version->build);
+        }
 
         return Command::SUCCESS;
     }

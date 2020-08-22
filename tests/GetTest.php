@@ -1,6 +1,6 @@
 <?php
 
-use SemVerCli\Commands\BaseCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\TestCase;
@@ -71,7 +71,7 @@ class GetTest extends TestCase
         $command = new CommandTester($this->app->find('get:pre-release'));
         $command->execute([]);
 
-        $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
+        $this->assertEquals(Command::SUCCESS, $command->getStatusCode());
         $this->assertEmpty($command->getDisplay());
     }
 
@@ -83,8 +83,8 @@ class GetTest extends TestCase
         $command = new CommandTester($this->app->find('get:pre-release'));
         $command->execute([], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
-        $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
-        $this->assertEquals('The pre-release value is not set' . PHP_EOL, $command->getDisplay());
+        $this->assertEquals(Command::SUCCESS, $command->getStatusCode());
+        $this->assertEquals('The pre-release value is NULL' . PHP_EOL, $command->getDisplay());
     }
 
     public function test_it_can_get_the_build_property(): void
@@ -103,7 +103,7 @@ class GetTest extends TestCase
         $command = new CommandTester($this->app->find('get:build'));
         $command->execute([]);
 
-        $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
+        $this->assertEquals(Command::SUCCESS, $command->getStatusCode());
         $this->assertEmpty($command->getDisplay());
     }
 
@@ -115,7 +115,7 @@ class GetTest extends TestCase
         $command = new CommandTester($this->app->find('get:build'));
         $command->execute([], ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]);
 
-        $this->assertEquals(BaseCommand::VALUE_NOT_SET, $command->getStatusCode());
-        $this->assertEquals('The build value is not set' . PHP_EOL, $command->getDisplay());
+        $this->assertEquals(Command::SUCCESS, $command->getStatusCode());
+        $this->assertEquals('The build value is NULL' . PHP_EOL, $command->getDisplay());
     }
 }

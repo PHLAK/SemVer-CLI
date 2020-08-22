@@ -4,14 +4,19 @@ namespace SemVerCli\Commands;
 
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHLAK\SemVer\Version;
+use SemVerCli\Traits\WritesVersion;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Initialize extends BaseCommand
+class Initialize extends Command
 {
+    use WritesVersion;
+
+    public const INITIALIZATION_FAILURE = 2;
+
     protected function configure(): void
     {
         $this->setName('initialize')->setAliases(['init']);
@@ -27,7 +32,7 @@ class Initialize extends BaseCommand
                 '<comment>Semantic versioning already initialized in this directory</comment>'
             );
 
-            return self::PREVIOUSLY_INITIALIZED;
+            return self::INITIALIZATION_FAILURE;
         }
 
         try {
@@ -40,7 +45,9 @@ class Initialize extends BaseCommand
             return Command::FAILURE;
         }
 
-        $this->writeVersionToDisk($input, $version);
+        touch($input->getOption('file'));
+
+        $this->writeVersion($input, $version);
 
         $output->writeln(
             sprintf('Semantic versioning initialized to <info>%s</info>', (string) $version)
