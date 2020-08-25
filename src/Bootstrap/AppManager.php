@@ -18,7 +18,7 @@ class AppManager
         $this->app = $app;
     }
 
-    /** Setup and configure the application.  */
+    /** Setup and configure the application. */
     public function __invoke(): Application
     {
         $this->app->addCommands($this->container->get('commands'));
