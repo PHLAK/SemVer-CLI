@@ -1,5 +1,6 @@
-SemVer-CLI
-==========
+<p align="center">
+    <img src="semver-cli.svg" alt="SemVer CLI" width="66%">
+</p>
 
 <p align="center">
     <a href="https://spectrum.chat/phlaknet"><img src="https://img.shields.io/badge/Join_the-Community-7b16ff.svg?style=for-the-badge" alt="Join our Community"></a>
