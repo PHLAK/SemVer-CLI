@@ -24,7 +24,7 @@ class AppManager
         $this->app->addCommands($this->container->get('commands'));
 
         $this->app->getDefinition()->addOption(
-            new InputOption('file', 'f', InputOption::VALUE_REQUIRED, 'Name of the version file', 'VERSION')
+            new InputOption('file', 'f', InputOption::VALUE_REQUIRED, 'Name of the version file', false)
         );
 
         return $this->app;

@@ -3,8 +3,8 @@
 namespace SemVerCli\Commands\Set;
 
 use PHLAK\SemVer;
+use SemVerCli\Commands\Command;
 use SemVerCli\Traits\WritesVersion;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

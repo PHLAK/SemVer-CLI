@@ -2,9 +2,9 @@
 
 namespace SemVerCli\Commands\Increment;
 
+use SemVerCli\Commands\Command;
 use SemVerCli\Traits\ReadsVersion;
 use SemVerCli\Traits\WritesVersion;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
