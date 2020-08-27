@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="semver-cli.svg" alt="SemVer CLI" width="66%">
+    <img src="semver-cli.svg" alt="SemVer CLI" width="50%">
 </p>
 
 <p align="center">
