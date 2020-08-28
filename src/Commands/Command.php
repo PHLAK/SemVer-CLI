@@ -11,7 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Command extends SymfonyCommand
 {
     public const CONFIG_FILE = 'semver.config.php';
-    public const INITIALIZATION_FAILURE = 2;
 
     /** @var array */
     protected $config = [];

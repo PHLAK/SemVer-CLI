@@ -2,9 +2,9 @@
 
 namespace SemVerCli\Commands;
 
+use Exception;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHLAK\SemVer\Version;
-use SemVerCli\Exceptions\InitializationException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -34,10 +34,10 @@ class Initialize extends Command
 
         try {
             $this->adapter->initializeVersion($version);
-        } catch (InitializationException $exception) {
+        } catch (Exception $exception) {
             $output->writeln(sprintf('<comment>%s</comment>', $exception->getMessage()));
 
-            return self::INITIALIZATION_FAILURE;
+            return Command::FAILURE;
         }
 
         $output->writeln(
