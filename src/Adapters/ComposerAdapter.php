@@ -83,12 +83,12 @@ class ComposerAdapter implements AdapterInterface
      */
     private function readComposer(): stdClass
     {
-        if (! file_exists($this->input->getOption('composer_file'))) {
+        if (! file_exists($this->input->getOption('composer'))) {
             throw new ReadException('Composer is not initialized, run composer init first');
         }
 
         return json_decode(file_get_contents(
-            $this->input->getOption('composer_file')
+            $this->input->getOption('composer')
         ), false, 512, JSON_THROW_ON_ERROR);
     }
 
@@ -100,12 +100,12 @@ class ComposerAdapter implements AdapterInterface
      */
     private function writeComposer(stdClass $contents): void
     {
-        if (! file_exists($this->input->getOption('composer_file'))) {
+        if (! file_exists($this->input->getOption('composer'))) {
             throw new WriteException('Composer is not initialized, run composer init first');
         }
 
         file_put_contents(
-            $this->input->getOption('composer_file'),
+            $this->input->getOption('composer'),
             json_encode($contents, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
             LOCK_EX
         );
