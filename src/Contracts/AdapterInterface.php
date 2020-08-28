@@ -9,7 +9,7 @@ interface AdapterInterface
     /**
      * Initialize the version storage.
      *
-     * @throws \SemVerCli\Exceptions\InitializationException;
+     * @throws \SemVerCli\Exceptions\InitializationException
      */
     public function initializeVersion(Version $version): void;
 

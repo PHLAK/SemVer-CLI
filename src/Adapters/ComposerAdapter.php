@@ -12,9 +12,19 @@ use SemVerCli\Exceptions\InitializationException;
 use SemVerCli\Exceptions\ReadException;
 use SemVerCli\Exceptions\WriteException;
 use stdClass;
+use Symfony\Component\Console\Input\InputInterface;
 
 class ComposerAdapter implements AdapterInterface
 {
+    /** @var InputInterface */
+    protected $input;
+
+    /** Create a new file adapter. */
+    public function __construct(InputInterface $input)
+    {
+        $this->input = $input;
+    }
+
     /** {@inheritdoc} */
     public function initializeVersion(Version $version): void
     {
@@ -68,8 +78,8 @@ class ComposerAdapter implements AdapterInterface
     /**
      * Get the contents of the composer file as an ojbect.
      *
-     * @throws RuntimeException;
-     * @throws JsonException;
+     * @throws RuntimeException
+     * @throws JsonException
      */
     private function readComposer(): stdClass
     {
@@ -79,14 +89,14 @@ class ComposerAdapter implements AdapterInterface
 
         return json_decode(file_get_contents(
             $this->input->getOption('composer_file')
-        ), JSON_THROW_ON_ERROR);
+        ), false, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
      * Write an object to the composer file.
      *
-     * @throws WriteException;
-     * @throws JsonException;
+     * @throws WriteException
+     * @throws JsonException
      */
     private function writeComposer(stdClass $contents): void
     {

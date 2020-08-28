@@ -19,7 +19,9 @@ class Major extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $version = $this->adapter->readVersion();
-        $this->adapter->writeVersion($version->setMajor($input->getArgument('value')));
+        $this->adapter->writeVersion(
+            $version->setMajor((int) $input->getArgument('value'))
+        );
 
         $output->writeln(
             sprintf('Version set to <info>%s</info>', (string) $version)

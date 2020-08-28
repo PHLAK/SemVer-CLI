@@ -20,7 +20,7 @@ class Command extends SymfonyCommand
     protected $adapter;
 
     /** {@inheritdoc} */
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         if (is_readable(self::CONFIG_FILE)) {
             $this->config = require self::CONFIG_FILE;

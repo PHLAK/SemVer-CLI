@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="3.14.2@3538fe1955d47f6ee926c0769d71af6db08aa488">
+  <file src="src/Adapters/ComposerAdapter.php">
+    <PossiblyInvalidArgument occurrences="4">
+      <code>$this-&gt;input-&gt;getOption('composer_file')</code>
+      <code>$this-&gt;input-&gt;getOption('composer_file')</code>
+      <code>$this-&gt;input-&gt;getOption('composer_file')</code>
+      <code>$this-&gt;input-&gt;getOption('composer_file')</code>
+    </PossiblyInvalidArgument>
+  </file>
+  <file src="src/Adapters/FileAdapter.php">
+    <PossiblyInvalidArgument occurrences="8">
+      <code>$this-&gt;input-&gt;getOption('file')</code>
+      <code>$this-&gt;input-&gt;getOption('file')</code>
+      <code>$this-&gt;input-&gt;getOption('file')</code>
+      <code>$this-&gt;input-&gt;getOption('file')</code>
+      <code>$this-&gt;input-&gt;getOption('file')</code>
+      <code>$this-&gt;input-&gt;getOption('file')</code>
+      <code>$this-&gt;input-&gt;getOption('file')</code>
+      <code>$this-&gt;input-&gt;getOption('file')</code>
+    </PossiblyInvalidArgument>
+  </file>
+  <file src="src/Commands/Command.php">
+    <MissingFile occurrences="1">
+      <code>require self::CONFIG_FILE</code>
+    </MissingFile>
+  </file>
+  <file src="src/Commands/Initialize.php">
+    <PossiblyInvalidArgument occurrences="2">
+      <code>$input-&gt;getArgument('version')</code>
+      <code>$input-&gt;getArgument('version') ?? '0.1.0'</code>
+    </PossiblyInvalidArgument>
+  </file>
+  <file src="src/Commands/Set/Build.php">
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$input-&gt;getArgument('value')</code>
+    </PossiblyInvalidArgument>
+  </file>
+  <file src="src/Commands/Set/PreRelease.php">
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$input-&gt;getArgument('value')</code>
+    </PossiblyInvalidArgument>
+  </file>
+  <file src="src/Commands/Set/Version.php">
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$input-&gt;getArgument('value')</code>
+    </PossiblyInvalidArgument>
+  </file>
+</files>

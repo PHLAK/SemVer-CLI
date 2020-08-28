@@ -35,7 +35,7 @@ class Initialize extends Command
         try {
             $this->adapter->initializeVersion($version);
         } catch (InitializationException $exception) {
-            $this->output->writeln(sprintf('<comment>%s</comment>', $exception->getMessage()));
+            $output->writeln(sprintf('<comment>%s</comment>', $exception->getMessage()));
 
             return self::INITIALIZATION_FAILURE;
         }
