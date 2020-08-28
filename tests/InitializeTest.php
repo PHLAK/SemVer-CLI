@@ -46,7 +46,7 @@ class InitializeTest extends TestCase
 
         $this->assertEquals(Command::FAILURE, $command->getStatusCode());
         $this->assertEquals(
-            'Failed to initialize, invalid semantic version string provided' . PHP_EOL,
+            'Invalid Semantic Version string provided' . PHP_EOL,
             $command->getDisplay()
         );
     }
