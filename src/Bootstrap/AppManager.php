@@ -1,6 +1,6 @@
 <?php
 
-namespace SemVerCli\Bootstrap;
+namespace PHLAK\SemVerCLI\Bootstrap;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;

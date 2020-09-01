@@ -1,14 +1,14 @@
 <?php
 
-namespace SemVerCli\Adapters;
+namespace PHLAK\SemVerCLI\Adapters;
 
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHLAK\SemVer\Version;
-use SemVerCli\Contracts\AdapterInterface;
-use SemVerCli\Exceptions\DestroyException;
-use SemVerCli\Exceptions\InitializationException;
-use SemVerCli\Exceptions\ReadException;
-use SemVerCli\Exceptions\WriteException;
+use PHLAK\SemVerCLI\Contracts\AdapterInterface;
+use PHLAK\SemVerCLI\Exceptions\DestroyException;
+use PHLAK\SemVerCLI\Exceptions\InitializationException;
+use PHLAK\SemVerCLI\Exceptions\ReadException;
+use PHLAK\SemVerCLI\Exceptions\WriteException;
 use Symfony\Component\Console\Input\InputInterface;
 
 class FileAdapter implements AdapterInterface

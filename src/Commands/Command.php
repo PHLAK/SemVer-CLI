@@ -1,9 +1,9 @@
 <?php
 
-namespace SemVerCli\Commands;
+namespace PHLAK\SemVerCLI\Commands;
 
-use SemVerCli\Adapters\AdapterFactory;
-use SemVerCli\Contracts\AdapterInterface;
+use PHLAK\SemVerCLI\Adapters\AdapterFactory;
+use PHLAK\SemVerCLI\Contracts\AdapterInterface;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

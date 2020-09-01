@@ -40,7 +40,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SemVerCli\\": "src/"
+            "PHLAK\\SemVerCLI\\": "src/"
         }
     },
     "autoload-dev": {

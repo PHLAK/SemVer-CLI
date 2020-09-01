@@ -1,6 +1,6 @@
 <?php
 
-namespace SemVerCli\Commands;
+namespace PHLAK\SemVerCLI\Commands;
 
 use Exception;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;

@@ -1,8 +1,8 @@
 <?php
 
-namespace SemVerCli\Commands\Clear;
+namespace PHLAK\SemVerCLI\Commands\Clear;
 
-use SemVerCli\Commands\Command;
+use PHLAK\SemVerCLI\Commands\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

@@ -1,6 +1,6 @@
 <?php
 
-use SemVerCli\Commands;
+use PHLAK\SemVerCLI\Commands;
 use Symfony\Component\Console\Application;
 
 return [

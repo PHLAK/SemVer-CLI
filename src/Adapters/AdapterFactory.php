@@ -1,9 +1,9 @@
 <?php
 
-namespace SemVerCli\Adapters;
+namespace PHLAK\SemVerCLI\Adapters;
 
+use PHLAK\SemVerCLI\Contracts\AdapterInterface;
 use RuntimeException;
-use SemVerCli\Contracts\AdapterInterface;
 use Symfony\Component\Console\Input\InputInterface;
 
 class AdapterFactory

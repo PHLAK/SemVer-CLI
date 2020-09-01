@@ -1,9 +1,9 @@
 <?php
 
-namespace SemVerCli\Commands\Set;
+namespace PHLAK\SemVerCLI\Commands\Set;
 
 use PHLAK\SemVer;
-use SemVerCli\Commands\Command;
+use PHLAK\SemVerCLI\Commands\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

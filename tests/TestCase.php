@@ -3,9 +3,9 @@
 namespace Tests;
 
 use DI\ContainerBuilder;
+use PHLAK\SemVerCLI\Bootstrap\AppManager;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 use Psr\Container\ContainerInterface;
-use SemVerCli\Bootstrap\AppManager;
 use Symfony\Component\Console\Application;
 
 class TestCase extends PHPUnitTestCase

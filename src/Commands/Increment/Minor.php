@@ -1,8 +1,8 @@
 <?php
 
-namespace SemVerCli\Commands\Increment;
+namespace PHLAK\SemVerCLI\Commands\Increment;
 
-use SemVerCli\Commands\Command;
+use PHLAK\SemVerCLI\Commands\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

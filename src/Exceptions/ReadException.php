@@ -1,6 +1,6 @@
 <?php
 
-namespace SemVerCli\Exceptions;
+namespace PHLAK\SemVerCLI\Exceptions;
 
 use RuntimeException;
 
