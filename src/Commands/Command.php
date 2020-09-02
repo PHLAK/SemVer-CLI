@@ -39,6 +39,12 @@ class Command extends SymfonyCommand
             return;
         }
 
+        if ($fileName = getenv('SEMVER_CLI_FILE_NAME')) {
+            $input->setOption('file', $fileName);
+
+            return;
+        }
+
         $input->setOption('file', $this->config['file_name'] ?? 'VERSION');
     }
 
@@ -49,13 +55,25 @@ class Command extends SymfonyCommand
             return;
         }
 
-        $input->setOption('composer', $this->config['file_name'] ?? 'composer.json');
+        if ($composerFile = getenv('SEMVER_CLI_COMPOSER_FILE')) {
+            $input->setOption('composer', $composerFile);
+
+            return;
+        }
+
+        $input->setOption('composer', $this->config['composer_file'] ?? 'composer.json');
     }
 
     /** Configure the 'adapter' option before command execution. */
     private function configureAdapterOption(InputInterface $input): void
     {
         if ($input->getOption('adapter') !== false) {
+            return;
+        }
+
+        if ($adapter = getenv('SEMVER_CLI_ADAPTER')) {
+            $input->setOption('adapter', $adapter);
+
             return;
         }
 
