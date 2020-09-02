@@ -33,6 +33,9 @@ return [
         new Commands\Set\Patch,
         new Commands\Set\PreRelease,
         new Commands\Set\Build,
+
+        // Destroy
+        new Commands\Destroy,
     ],
 
     /* Container definitions. */

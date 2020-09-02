@@ -72,7 +72,15 @@ class ComposerAdapter implements AdapterInterface
     /** {@inheritdoc} */
     public function destroyVersion(): void
     {
-        throw new DestroyException('Failed to destroy version');
+        $composer = $this->readComposer();
+
+        if (! isset($composer->version)) {
+            throw new DestroyException('Semantic versioning is not intialized');
+        }
+
+        unset($composer->version);
+
+        $this->writeComposer($composer);
     }
 
     /**

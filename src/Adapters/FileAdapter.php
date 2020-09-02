@@ -60,21 +60,27 @@ class FileAdapter implements AdapterInterface
     public function writeVersion(Version $version): void
     {
         if (! file_exists($this->input->getOption('file'))) {
-            throw new WriteException('Semantic versioning is not intialized');
+            throw new WriteException(self::NOT_INITIALIZED);
         }
 
         if (! is_writable($this->input->getOption('file'))) {
-            throw new WriteException('Version file exists but is not writable');
+            throw new WriteException(self::NOT_WRITABLE);
         }
 
         if (! file_put_contents($this->input->getOption('file'), (string) $version, LOCK_EX)) {
-            throw new WriteException('Failed writing to version file');
+            throw new WriteException(self::WRITE_FAILURE);
         }
     }
 
     /** {@inheritdoc} */
     public function destroyVersion(): void
     {
-        throw new DestroyException('Failed to destroy version');
+        if (! file_exists($this->input->getOption('file'))) {
+            throw new DestroyException(self::NOT_INITIALIZED);
+        }
+
+        if (! unlink($this->input->getOption('file'))) {
+            throw new DestroyException(self::DESTROY_FAILURE);
+        }
     }
 }
