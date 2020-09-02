@@ -2,10 +2,10 @@
 
 namespace Tests;
 
+use DI\Container;
 use DI\ContainerBuilder;
 use PHLAK\SemVerCLI\Bootstrap\AppManager;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
-use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
 
 class TestCase extends PHPUnitTestCase
@@ -13,7 +13,7 @@ class TestCase extends PHPUnitTestCase
     protected const DATA_DIR = __DIR__ . '/_data';
 
     protected Application $app;
-    protected ContainerInterface $container;
+    protected Container $container;
 
     public function setUp(): void
     {
@@ -25,14 +25,5 @@ class TestCase extends PHPUnitTestCase
 
         $this->container->call(AppManager::class);
         $this->app = $this->container->get(Application::class);
-    }
-
-    public function tearDown(): void
-    {
-        $versionFilePath = sprintf('%s/%s', self::DATA_DIR, 'VERSION');
-
-        if (file_exists($versionFilePath)) {
-            unlink($versionFilePath);
-        }
     }
 }

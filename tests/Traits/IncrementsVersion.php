@@ -1,20 +1,15 @@
 <?php
 
+namespace Tests\Traits;
+
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\TestCase;
 
-class IncrementTest extends TestCase
+trait IncrementsVersion
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $command = new CommandTester($this->app->find('init'));
-        $command->execute(['version' => '1.3.37']);
-    }
-
     public function test_it_can_increment_major(): void
     {
+        $this->initializeVersion('1.3.37');
+
         $command = new CommandTester($this->app->find('increment:major'));
         $command->execute([]);
 
@@ -23,6 +18,8 @@ class IncrementTest extends TestCase
 
     public function test_it_can_increment_minor(): void
     {
+        $this->initializeVersion('1.3.37');
+
         $command = new CommandTester($this->app->find('increment:minor'));
         $command->execute([]);
 
@@ -31,6 +28,8 @@ class IncrementTest extends TestCase
 
     public function test_it_can_increment_patch(): void
     {
+        $this->initializeVersion('1.3.37');
+
         $command = new CommandTester($this->app->find('increment:patch'));
         $command->execute([]);
 

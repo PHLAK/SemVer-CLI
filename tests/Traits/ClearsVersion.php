@@ -1,21 +1,17 @@
 <?php
 
-namespace Tests;
+namespace Tests\Traits;
 
 use Symfony\Component\Console\Tester\CommandTester;
 
-class ClearTest extends TestCase
+trait ClearsVersion
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $command = new CommandTester($this->app->find('init'));
-        $command->execute(['version' => '1.3.37-beta.5+007']);
-    }
+    use HasHelpers;
 
     public function test_it_can_clear_the_pre_release(): void
     {
+        $this->initializeVersion('1.3.37-beta.5+007');
+
         $command = new CommandTester($this->app->find('clear:pre-release'));
         $command->execute([]);
 
@@ -27,6 +23,8 @@ class ClearTest extends TestCase
 
     public function test_it_can_clear_the_build_value(): void
     {
+        $this->initializeVersion('1.3.37-beta.5+007');
+
         $command = new CommandTester($this->app->find('clear:build'));
         $command->execute([]);
 

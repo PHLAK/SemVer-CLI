@@ -1,10 +1,11 @@
 <?php
 
+namespace Tests\Traits;
+
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\TestCase;
 
-class InitializeTest extends TestCase
+trait InitializesVersion
 {
     public function test_it_can_be_initialized(): void
     {
