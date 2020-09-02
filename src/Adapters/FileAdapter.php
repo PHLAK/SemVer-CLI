@@ -5,10 +5,8 @@ namespace PHLAK\SemVerCLI\Adapters;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHLAK\SemVer\Version;
 use PHLAK\SemVerCLI\Contracts\AdapterInterface;
-use PHLAK\SemVerCLI\Exceptions\DestroyException;
-use PHLAK\SemVerCLI\Exceptions\InitializationException;
-use PHLAK\SemVerCLI\Exceptions\ReadException;
-use PHLAK\SemVerCLI\Exceptions\WriteException;
+use PHLAK\SemVerCLI\Exceptions\FileException;
+use PHLAK\SemVerCLI\Exceptions\SemanticVersionException;
 use Symfony\Component\Console\Input\InputInterface;
 
 class FileAdapter implements AdapterInterface
@@ -26,10 +24,12 @@ class FileAdapter implements AdapterInterface
     public function initializeVersion(Version $version): void
     {
         if (file_exists($this->input->getOption('file'))) {
-            throw new InitializationException('Semantic versioning already initialized');
+            throw SemanticVersionException::alreadyInitialized();
         }
 
-        touch($this->input->getOption('file'));
+        if (! touch($this->input->getOption('file'))) {
+            throw new SemanticVersionException('Failed to create the version file');
+        }
 
         $this->writeVersion($version);
     }
@@ -38,21 +38,19 @@ class FileAdapter implements AdapterInterface
     public function readVersion(): Version
     {
         if (! file_exists($this->input->getOption('file'))) {
-            throw new ReadException('Semantic versioning is not intialized');
+            throw SemanticVersionException::notInitialized();
         }
 
         if (! is_readable($this->input->getOption('file'))) {
-            throw new ReadException('Version file exists but is not readbale');
+            throw FileException::notReadable($this->input->getOption('file'));
         }
 
-        if (! $contents = @file_get_contents($this->input->getOption('file'))) {
-            throw new ReadException('Failed reading version from version file');
-        }
+        $contents = @file_get_contents($this->input->getOption('file'));
 
         try {
             return new Version($contents);
         } catch (InvalidVersionException $exception) {
-            throw new ReadException('Failed to parse version from version file');
+            throw SemanticVersionException::parseFailure($contents);
         }
     }
 
@@ -60,27 +58,25 @@ class FileAdapter implements AdapterInterface
     public function writeVersion(Version $version): void
     {
         if (! file_exists($this->input->getOption('file'))) {
-            throw new WriteException(self::NOT_INITIALIZED);
+            throw SemanticVersionException::notInitialized();
         }
 
         if (! is_writable($this->input->getOption('file'))) {
-            throw new WriteException(self::NOT_WRITABLE);
+            throw FileException::notWriteable($this->input->getOption('file'));
         }
 
-        if (! file_put_contents($this->input->getOption('file'), (string) $version, LOCK_EX)) {
-            throw new WriteException(self::WRITE_FAILURE);
-        }
+        file_put_contents($this->input->getOption('file'), (string) $version, LOCK_EX);
     }
 
     /** {@inheritdoc} */
     public function destroyVersion(): void
     {
         if (! file_exists($this->input->getOption('file'))) {
-            throw new DestroyException(self::NOT_INITIALIZED);
+            throw SemanticVersionException::notInitialized();
         }
 
         if (! unlink($this->input->getOption('file'))) {
-            throw new DestroyException(self::DESTROY_FAILURE);
+            throw SemanticVersionException::destroyFailure();
         }
     }
 }

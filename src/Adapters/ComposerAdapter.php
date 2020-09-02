@@ -6,9 +6,8 @@ use JsonException;
 use PHLAK\SemVer\Exceptions\InvalidVersionException;
 use PHLAK\SemVer\Version;
 use PHLAK\SemVerCLI\Contracts\AdapterInterface;
-use PHLAK\SemVerCLI\Exceptions\DestroyException;
-use PHLAK\SemVerCLI\Exceptions\InitializationException;
-use PHLAK\SemVerCLI\Exceptions\ReadException;
+use PHLAK\SemVerCLI\Exceptions\ComposerException;
+use PHLAK\SemVerCLI\Exceptions\SemanticVersionException;
 use PHLAK\SemVerCLI\Exceptions\WriteException;
 use RuntimeException;
 use stdClass;
@@ -16,6 +15,8 @@ use Symfony\Component\Console\Input\InputInterface;
 
 class ComposerAdapter implements AdapterInterface
 {
+    protected const JSON_OPTIONS = JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
+
     /** @var InputInterface */
     protected $input;
 
@@ -30,8 +31,8 @@ class ComposerAdapter implements AdapterInterface
     {
         $composer = $this->readComposer();
 
-        if ($composer->version !== null) {
-            throw new InitializationException('Semantic versioning already initialized');
+        if (isset($composer->version)) {
+            throw SemanticVersionException::alreadyInitialized();
         }
 
         $composer->version = (string) $version;
@@ -44,14 +45,14 @@ class ComposerAdapter implements AdapterInterface
     {
         $composer = $this->readComposer();
 
-        if ($composer->version === null) {
-            throw new ReadException('Semantic versioning is not intialized');
+        if (! isset($composer->version)) {
+            throw SemanticVersionException::notInitialized();
         }
 
         try {
             return new Version($composer->version);
         } catch (InvalidVersionException $exception) {
-            throw new ReadException('Failed to parse version from composer file');
+            throw SemanticVersionException::parseFailure($composer->version);
         }
     }
 
@@ -60,8 +61,8 @@ class ComposerAdapter implements AdapterInterface
     {
         $composer = $this->readComposer();
 
-        if ($composer->version === null) {
-            throw new WriteException('Semantic versioning is not intialized');
+        if (! isset($composer->version)) {
+            throw SemanticVersionException::notInitialized();
         }
 
         $composer->version = (string) $version;
@@ -75,7 +76,7 @@ class ComposerAdapter implements AdapterInterface
         $composer = $this->readComposer();
 
         if (! isset($composer->version)) {
-            throw new DestroyException('Semantic versioning is not intialized');
+            throw SemanticVersionException::notInitialized();
         }
 
         unset($composer->version);
@@ -92,7 +93,7 @@ class ComposerAdapter implements AdapterInterface
     private function readComposer(): stdClass
     {
         if (! file_exists($this->input->getOption('composer'))) {
-            throw new ReadException('Composer is not initialized, run composer init first');
+            throw ComposerException::notInitialized();
         }
 
         return json_decode(file_get_contents(
@@ -109,12 +110,12 @@ class ComposerAdapter implements AdapterInterface
     private function writeComposer(stdClass $contents): void
     {
         if (! file_exists($this->input->getOption('composer'))) {
-            throw new WriteException('Composer is not initialized, run composer init first');
+            throw SemanticVersionException::destroyFailure();
         }
 
         file_put_contents(
             $this->input->getOption('composer'),
-            json_encode($contents, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
+            json_encode($contents, self::JSON_OPTIONS),
             LOCK_EX
         );
     }
