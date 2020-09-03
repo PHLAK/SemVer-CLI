@@ -8,7 +8,6 @@ use PHLAK\SemVer\Version;
 use PHLAK\SemVerCLI\Contracts\AdapterInterface;
 use PHLAK\SemVerCLI\Exceptions\ComposerException;
 use PHLAK\SemVerCLI\Exceptions\SemanticVersionException;
-use PHLAK\SemVerCLI\Exceptions\WriteException;
 use RuntimeException;
 use stdClass;
 use Symfony\Component\Console\Input\InputInterface;
@@ -104,7 +103,7 @@ class ComposerAdapter implements AdapterInterface
     /**
      * Write an object to the composer file.
      *
-     * @throws WriteException
+     * @throws SemanticVersionException
      * @throws JsonException
      */
     private function writeComposer(stdClass $contents): void

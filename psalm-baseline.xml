@@ -9,7 +9,11 @@
     </PossiblyInvalidArgument>
   </file>
   <file src="src/Adapters/FileAdapter.php">
-    <PossiblyInvalidArgument occurrences="8">
+    <PossiblyInvalidArgument occurrences="12">
+      <code>$this-&gt;input-&gt;getOption('file')</code>
+      <code>$this-&gt;input-&gt;getOption('file')</code>
+      <code>$this-&gt;input-&gt;getOption('file')</code>
+      <code>$this-&gt;input-&gt;getOption('file')</code>
       <code>$this-&gt;input-&gt;getOption('file')</code>
       <code>$this-&gt;input-&gt;getOption('file')</code>
       <code>$this-&gt;input-&gt;getOption('file')</code>
