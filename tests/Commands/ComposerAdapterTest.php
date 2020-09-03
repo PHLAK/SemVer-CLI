@@ -1,9 +1,12 @@
 <?php
 
-namespace Tests;
+namespace Tests\Commands;
 
+use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
+use Tests\TestCase;
+use Tests\Traits;
 
 class ComposerAdapterTest extends TestCase
 {
@@ -47,14 +50,16 @@ class ComposerAdapterTest extends TestCase
     /** Initialize Composer in the dest directory. */
     protected function initializeComposer(): void
     {
-        copy($this->filePath('skeleton/composer.json'), __DIR__ . '/_data/composer.json');
+        copy($this->filePath('skeleton/composer.json'), dirname(__DIR__) . '/_data/composer.json');
     }
 
     /** Remove the composer.json file from the test directory. */
     protected function destroyComposer(): void
     {
-        if (file_exists('composer.json')) {
-            unlink('composer.json');
+        try {
+            unlink($this->filePath('composer.json'));
+        } catch (RuntimeException $exception) {
+            // Fo'get about it...
         }
     }
 }

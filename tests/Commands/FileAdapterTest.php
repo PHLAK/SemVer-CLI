@@ -1,8 +1,10 @@
 <?php
 
-namespace Tests;
+namespace Tests\Commands;
 
 use Symfony\Component\Console\Tester\CommandTester;
+use Tests\TestCase;
+use Tests\Traits;
 
 class FileAdapterTest extends TestCase
 {
