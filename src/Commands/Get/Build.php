@@ -25,7 +25,7 @@ class Build extends Command
         }
 
         if ($version->build !== null) {
-            $output->writeln($version->build);
+            $output->writeln((string) $version->build);
         }
 
         return Command::SUCCESS;

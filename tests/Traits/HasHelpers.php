@@ -17,10 +17,8 @@ trait HasHelpers
     /** Get the file path to a test file. */
     protected function filePath(string $path = null): string
     {
-        $filePath = realpath(dirname(__DIR__) . '/_data/' . $path);
-
-        if ($filePath === false) {
-            throw new RuntimeException(sprintf('File not found: %s', $filePath));
+        if (! is_readable($filePath = dirname(__DIR__) . '/_data/' . (string) $path)) {
+            throw new RuntimeException(sprintf('File not found or not readable: %s', $filePath));
         }
 
         return $filePath;

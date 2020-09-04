@@ -49,9 +49,9 @@ class ComposerAdapter implements AdapterInterface
         }
 
         try {
-            return new Version($composer->version);
+            return new Version((string) $composer->version);
         } catch (InvalidVersionException $exception) {
-            throw SemanticVersionException::parseFailure($composer->version);
+            throw SemanticVersionException::parseFailure((string) $composer->version);
         }
     }
 

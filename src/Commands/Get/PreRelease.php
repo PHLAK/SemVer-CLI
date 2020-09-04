@@ -25,7 +25,7 @@ class PreRelease extends Command
         }
 
         if ($version->preRelease !== null) {
-            $output->writeln($version->preRelease);
+            $output->writeln((string) $version->preRelease);
         }
 
         return Command::SUCCESS;

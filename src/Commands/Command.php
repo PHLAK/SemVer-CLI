@@ -11,6 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Command extends SymfonyCommand
 {
     public const CONFIG_FILE = 'semver.config.php';
+    public const DEFAULT_STORAGE_ADAPTER = 'file';
+    public const DEFUALT_COMPOSER_FILE = 'composer.json';
+    public const DEFAULT_VERSION_FILE = 'VERSION';
 
     /** @var array */
     protected $config = [];
@@ -22,61 +25,67 @@ class Command extends SymfonyCommand
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         if (is_readable(self::CONFIG_FILE)) {
-            $this->config = require self::CONFIG_FILE;
+            $this->config = (array) require self::CONFIG_FILE;
         }
 
-        $this->configureFileOption($input);
-        $this->configureComposerOption($input);
-        $this->configureAdapterOption($input);
+        $input->setOption('file', $this->getFileOption($input));
+        $input->setOption('composer', $this->getComposerOption($input));
+        $input->setOption('adapter', $this->getAdapterOption($input));
 
         $this->adapter = AdapterFactory::make($input);
     }
 
-    /** Configure the 'file' option before command execution. */
-    private function configureFileOption(InputInterface $input): void
+    /** Get the 'file' option. */
+    private function getFileOption(InputInterface $input): string
     {
         if ($input->getOption('file') !== false) {
-            return;
+            return (string) $input->getOption('file');
         }
 
         if ($fileName = getenv('SEMVER_CLI_FILE_NAME')) {
-            $input->setOption('file', $fileName);
-
-            return;
+            return $fileName;
         }
 
-        $input->setOption('file', $this->config['file_name'] ?? 'VERSION');
+        if (isset($this->config['file_name'])) {
+            return (string) $this->config['file_name'];
+        }
+
+        return self::DEFAULT_VERSION_FILE;
     }
 
-    /** Configre the 'composer' option before command execution. */
-    private function configureComposerOption(InputInterface $input): void
+    /** Get the 'composer' option. */
+    private function getComposerOption(InputInterface $input): string
     {
         if ($input->getOption('composer') !== false) {
-            return;
+            return (string) $input->getOption('composer');
         }
 
         if ($composerFile = getenv('SEMVER_CLI_COMPOSER_FILE')) {
-            $input->setOption('composer', $composerFile);
-
-            return;
+            return $composerFile;
         }
 
-        $input->setOption('composer', $this->config['composer_file'] ?? 'composer.json');
+        if (isset($this->config['composer_file'])) {
+            return (string) $this->config['composer_file'];
+        }
+
+        return self::DEFUALT_COMPOSER_FILE;
     }
 
-    /** Configure the 'adapter' option before command execution. */
-    private function configureAdapterOption(InputInterface $input): void
+    /** Get the 'adapter' option. */
+    private function getAdapterOption(InputInterface $input): string
     {
         if ($input->getOption('adapter') !== false) {
-            return;
+            return (string) $input->getOption('adapter');
         }
 
         if ($adapter = getenv('SEMVER_CLI_ADAPTER')) {
-            $input->setOption('adapter', $adapter);
-
-            return;
+            return $adapter;
         }
 
-        $input->setOption('adapter', $this->config['adapter'] ?? 'file');
+        if (isset($this->config['adapter'])) {
+            return (string) $this->config['adapter'];
+        }
+
+        return self::DEFAULT_STORAGE_ADAPTER;
     }
 }
