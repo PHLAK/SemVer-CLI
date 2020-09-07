@@ -21,11 +21,10 @@ class AppManagerTest extends TestCase
             $testCommand = new Command('test-command'),
         ]);
 
-        $app = new Application('Semantic versioning helper', '0.1.0');
+        $application = new Application('Semantic versioning helper', '0.1.0');
 
-        $app = (new AppManager($container, $app))();
+        $app = (new AppManager($container, $application))();
 
-        $this->assertInstanceOf(Application::class, $app);
         $this->assertTrue($app->getDefinition()->hasOption('adapter'));
         $this->assertTrue($app->getDefinition()->hasOption('composer'));
         $this->assertTrue($app->getDefinition()->hasOption('file'));
