@@ -8,6 +8,7 @@ use Tests\Traits;
 
 /**
  * @covers \PHLAK\SemVerCLI\Adapters\FileAdapter
+ * @covers \PHLAK\SemVerCLI\Commands\Command
  * @covers \PHLAK\SemVerCLI\Commands\Clear\Build
  * @covers \PHLAK\SemVerCLI\Commands\Clear\PreRelease
  * @covers \PHLAK\SemVerCLI\Commands\Destroy
