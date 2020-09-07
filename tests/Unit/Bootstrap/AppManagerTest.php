@@ -18,7 +18,7 @@ class AppManagerTest extends TestCase
         /** @var ContainerInterface&MockObject $container */
         $container = $this->createMock(ContainerInterface::class);
         $container->expects($this->once())->method('get')->with('commands')->willReturn([
-            $testCommand = new Command('test-command')
+            $testCommand = new Command('test-command'),
         ]);
 
         $app = new Application('Semantic versioning helper', '0.1.0');
