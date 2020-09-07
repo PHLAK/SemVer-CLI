@@ -48,7 +48,9 @@
             "Tests\\": "tests/"
         }
     },
-    "bin": ["semver"],
+    "bin": [
+        "semver"
+    ],
     "config": {
         "sort-packages": true,
         "optimize-autoloader": true
