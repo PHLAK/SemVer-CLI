@@ -6,6 +6,7 @@ use DI\Container;
 use DI\ContainerBuilder;
 use PHLAK\SemVerCLI\Bootstrap\AppManager;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
+use RuntimeException;
 use Symfony\Component\Console\Application;
 
 class TestCase extends PHPUnitTestCase
@@ -25,5 +26,15 @@ class TestCase extends PHPUnitTestCase
 
         $this->container->call(AppManager::class);
         $this->app = $this->container->get(Application::class);
+    }
+
+    /** Get the file path to a test file. */
+    protected function filePath(string $path = null): string
+    {
+        if (! is_readable($filePath = __DIR__ . '/_data/' . (string) $path)) {
+            throw new RuntimeException(sprintf('File not found or not readable: %s', $filePath));
+        }
+
+        return $filePath;
     }
 }

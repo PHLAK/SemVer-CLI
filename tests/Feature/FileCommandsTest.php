@@ -1,12 +1,34 @@
 <?php
 
-namespace Tests\Commands;
+namespace Tests\Feature;
 
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\TestCase;
 use Tests\Traits;
 
-class FileAdapterTest extends TestCase
+/**
+ * @covers \PHLAK\SemVerCLI\Adapters\FileAdapter
+ * @covers \PHLAK\SemVerCLI\Commands\Clear\Build
+ * @covers \PHLAK\SemVerCLI\Commands\Clear\PreRelease
+ * @covers \PHLAK\SemVerCLI\Commands\Destroy
+ * @covers \PHLAK\SemVerCLI\Commands\Get\Build
+ * @covers \PHLAK\SemVerCLI\Commands\Get\Major
+ * @covers \PHLAK\SemVerCLI\Commands\Get\Minor
+ * @covers \PHLAK\SemVerCLI\Commands\Get\Patch
+ * @covers \PHLAK\SemVerCLI\Commands\Get\PreRelease
+ * @covers \PHLAK\SemVerCLI\Commands\Get\Version
+ * @covers \PHLAK\SemVerCLI\Commands\Increment\Major
+ * @covers \PHLAK\SemVerCLI\Commands\Increment\Minor
+ * @covers \PHLAK\SemVerCLI\Commands\Increment\Patch
+ * @covers \PHLAK\SemVerCLI\Commands\Initialize
+ * @covers \PHLAK\SemVerCLI\Commands\Set\Build
+ * @covers \PHLAK\SemVerCLI\Commands\Set\Major
+ * @covers \PHLAK\SemVerCLI\Commands\Set\Minor
+ * @covers \PHLAK\SemVerCLI\Commands\Set\Patch
+ * @covers \PHLAK\SemVerCLI\Commands\Set\PreRelease
+ * @covers \PHLAK\SemVerCLI\Commands\Set\Version
+ */
+class FileCommandsTest extends TestCase
 {
     use Traits\ClearsVersion;
     use Traits\DestroysVersion;
@@ -14,6 +36,7 @@ class FileAdapterTest extends TestCase
     use Traits\IncrementsVersion;
     use Traits\InitializesVersion;
     use Traits\SetsVersion;
+    use Traits\UsesComposer;
 
     public function setUp(): void
     {
@@ -39,6 +62,7 @@ class FileAdapterTest extends TestCase
         $command->execute([]);
 
         $this->assertFileExists('VERSION');
+        $this->assertStringEqualsFile('VERSION', '0.1.0');
     }
 
     public function test_it_can_override_the_version_file_name(): void
