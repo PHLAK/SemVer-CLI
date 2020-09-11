@@ -4,10 +4,8 @@
 use DI\ContainerBuilder;
 use PHLAK\SemVerCLI\Bootstrap\AppManager;
 
-for ($level = 0; $level <= 4; $level++) {
-    $path = $level === 0 ? __DIR__ : dirname(__DIR__, $level);
-
-    if (is_readable($autoloader = $path . '/vendor/autoload.php')) {
+for ($level = 1; $level <= 5; $level++) {
+    if (is_readable($autoloader = dirname(__DIR__, $level) . '/vendor/autoload.php')) {
         require $autoloader;
         break;
     }
@@ -15,7 +13,7 @@ for ($level = 0; $level <= 4; $level++) {
 
 // Initialize the container
 $container = (new ContainerBuilder)->addDefinitions(
-    ...glob(__DIR__ . '/config/*.php')
+    ...glob(dirname(__DIR__) . '/config/*.php')
 )->build();
 
 // Initialize the application

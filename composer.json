@@ -49,7 +49,7 @@
         }
     },
     "bin": [
-        "semver"
+        "bin/semver"
     ],
     "config": {
         "sort-packages": true,
