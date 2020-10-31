@@ -149,19 +149,76 @@ You can increment the version values with the `increment` command.
 >   - Incrementing the `major`, `minor` or `patch` value will also clear the 
 >     `pre-release` and `build` values
 
-#### Global Options
+Adapters
+--------
 
-You can control the file to which the commands read and write the version via
-the `--file` option. This option takes the name you'd like to use for the file
-and can be passed along with any command.
+The method used for storing version information can be configured with the
+`--adapter` option. The following are the available adapters to choose from.
 
-    $ semver --file .version initialize
+<dl>
+  <dt><code>file</code></dt>
+  <dd>Stores the version in a regular file in the current directory (default)<dd>
+
+  <dt><code>composer</code></dt>
+  <dd>
+    Stores the version in the <code>composer.json</code> file under the
+    <a href="https://getcomposer.org/doc/04-schema.md#version">version</a> property
+  </dd>
+</dl>
+
+When using the `file` adapter you can control the file to which commands read
+and write the version via the `--file` option. This option takes the name you'd
+like to use and will look for a file with that name in the current directory.
+
     $ semver --file .version get:version
+
+By default the `composer` adapter will look for your `composer.json` file in the
+current directory. If your `composer.json` file lives elsewhere you can specify
+the path with the `--composer` option.
+
+    $ semver --composer path/to/composer.json increment:major
+
+> ℹ️ Adapter options can be passed passed along with any command.
 
 Configuration
 -------------
 
-Coming soon...
+Instead of passing adapter options with every command you can set these options
+in a persistent configuration file. To enable the config create a file in your
+project directory with a name of `semver.config.php`. This file MUST be a PHP
+file and return an array with with one or more of the followng configuration
+options.
+
+<dl>
+  <dt><code>adapter</code></dt>
+  <dd>
+    <p>The storage adapter in which version data will be stored.</p>
+    <p>Equivilent to the <code>--adapter</code> option.</p>
+  </dd>
+
+  <dt><code>file_name</code></dt>
+  <dd>
+    <p>Name of the version file when using the file adapter.</p>
+    <p>Equvilent to the <code>--file</code> option.</p>
+  </dd>
+
+  <dt><code>composer_file</code></dt>
+  <dd>
+    <p>Path to the composer file when using the composer adpater</p>
+    <p>Equvilent to the <code>--composer</code> option.</p>
+  </dd>
+</dl>
+
+### Examples
+
+```php
+<?php
+
+return [
+    'adapter' => 'composer',
+    'composer_file' => 'some/path/composer.json',
+];
+```
 
 Changelog
 ---------
