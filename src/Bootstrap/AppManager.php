@@ -27,7 +27,7 @@ class AppManager
         $this->app->addCommands($this->container->get('commands'));
 
         $this->app->getDefinition()->addOptions([
-            new InputOption('adapter', 'a', InputOption::VALUE_REQUIRED, 'The storage adapter where the version data will be stsored', false),
+            new InputOption('adapter', 'a', InputOption::VALUE_REQUIRED, 'The storage adapter in which version data will be stored', false),
             new InputOption('composer', 'c', InputOption::VALUE_REQUIRED, 'Path to the composer file when using the composer adpater', false),
             new InputOption('file', 'f', InputOption::VALUE_REQUIRED, 'Name of the version file when using the file adapter', false),
         ]);
