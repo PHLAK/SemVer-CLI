@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="4.1.0@8929bde5354595dc61947b7e27cfe59db45e3bb0">
   <file src="src/Adapters/ComposerAdapter.php">
-    <PossiblyInvalidArgument occurrences="4">
-      <code>$this-&gt;input-&gt;getOption('composer')</code>
-      <code>$this-&gt;input-&gt;getOption('composer')</code>
-      <code>$this-&gt;input-&gt;getOption('composer')</code>
-      <code>$this-&gt;input-&gt;getOption('composer')</code>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$input-&gt;getOption('composer')</code>
     </PossiblyInvalidArgument>
   </file>
   <file src="src/Adapters/FileAdapter.php">

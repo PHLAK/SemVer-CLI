@@ -9,7 +9,6 @@ use PHLAK\SemVer\Version;
 use PHLAK\SemVerCLI\Contracts\AdapterInterface;
 use PHLAK\SemVerCLI\Exceptions\ComposerException;
 use PHLAK\SemVerCLI\Exceptions\SemanticVersionException;
-use stdClass;
 use Symfony\Component\Console\Input\InputInterface;
 
 class ComposerAdapter implements AdapterInterface
@@ -86,7 +85,7 @@ class ComposerAdapter implements AdapterInterface
      *
      * @throws ComposerException
      */
-    private function readComposer(): stdClass
+    private function readComposer(): object
     {
         if (! $this->composer->exists()) {
             throw ComposerException::notInitialized();
@@ -100,7 +99,7 @@ class ComposerAdapter implements AdapterInterface
      *
      * @throws ComposerException
      */
-    private function writeComposer(stdClass $contents): void
+    private function writeComposer(object $contents): void
     {
         if (! $this->composer->exists()) {
             throw ComposerException::notInitialized();
