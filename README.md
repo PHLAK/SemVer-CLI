@@ -228,7 +228,7 @@ A list of changes can be found on the [GitHub Releases](https://github.com/PHLAK
 Troubleshooting
 ---------------
 
-For general help and support join our [Spectrum Community](https://spectrum.chat/phlaknet
+For general help and support join our [Spectrum Community](https://spectrum.chat/phlaknet)
 or reach out on [Twitter](https://twitter.com/PHLAK).
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/SemVer-CLI/issues).
