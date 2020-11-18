@@ -33,7 +33,7 @@ class FileAdapterTest extends TestCase
     public function tearDown(): void
     {
         foreach ([self::VERSION_FILE, '.version'] as $versionFile) {
-            if (file_exists($versionFile)) {
+            if (is_file($versionFile)) {
                 unlink($versionFile);
             }
         }

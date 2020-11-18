@@ -18,7 +18,7 @@ trait UsesComposer
     {
         $composerFile = __DIR__ . '/../_data/composer.json';
 
-        if (file_exists($composerFile)) {
+        if (is_file($composerFile)) {
             unlink($composerFile);
         }
     }

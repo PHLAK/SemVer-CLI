@@ -49,7 +49,7 @@ class FileCommandsTest extends TestCase
     public function tearDown(): void
     {
         foreach (['VERSION', '.version'] as $versionFile) {
-            if (file_exists($versionFile)) {
+            if (is_file($versionFile)) {
                 unlink($versionFile);
             }
         }

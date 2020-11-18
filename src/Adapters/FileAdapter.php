@@ -23,7 +23,7 @@ class FileAdapter implements AdapterInterface
     /** {@inheritdoc} */
     public function initializeVersion(Version $version): void
     {
-        if (file_exists($this->input->getOption('file'))) {
+        if (is_file($this->input->getOption('file'))) {
             throw SemanticVersionException::alreadyInitialized();
         }
 
@@ -37,7 +37,7 @@ class FileAdapter implements AdapterInterface
     /** {@inheritdoc} */
     public function readVersion(): Version
     {
-        if (! file_exists($this->input->getOption('file'))) {
+        if (! is_file($this->input->getOption('file'))) {
             throw SemanticVersionException::notInitialized();
         }
 
@@ -57,7 +57,7 @@ class FileAdapter implements AdapterInterface
     /** {@inheritdoc} */
     public function writeVersion(Version $version): void
     {
-        if (! file_exists($this->input->getOption('file'))) {
+        if (! is_file($this->input->getOption('file'))) {
             throw SemanticVersionException::notInitialized();
         }
 
@@ -71,7 +71,7 @@ class FileAdapter implements AdapterInterface
     /** {@inheritdoc} */
     public function destroyVersion(): void
     {
-        if (! file_exists($this->input->getOption('file'))) {
+        if (! is_file($this->input->getOption('file'))) {
             throw SemanticVersionException::notInitialized();
         }
 
