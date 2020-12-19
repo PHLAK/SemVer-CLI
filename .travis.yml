@@ -1,12 +1,12 @@
 os: linux
-dist: focal
+dist: bionic
 language: php
 
-env:
-  - PATH="vendor/bin:${PATH}"
-
 php:
+  - 7.2
+  - 7.3
   - 7.4
+  - 8.0
   - nightly
 
 jobs:
@@ -18,9 +18,9 @@ cache:
     - $HOME/.composer/cache
     - vendor
 
-install: composer install --no-suggest
+install: composer install
 
 script:
-  - php-cs-fixer fix --diff --dry-run
-  - psalm --show-info=true
-  - phpunit --coverage-text
+  - vendor/bin/php-cs-fixer fix --diff --dry-run
+  - vendor/bin/psalm --show-info=true
+  - vendor/bin/phpunit --coverage-text
