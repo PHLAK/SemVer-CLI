@@ -21,6 +21,6 @@ cache:
 install: composer install
 
 script:
-  - vendor/bin/php-cs-fixer fix --diff --dry-run
+  - '[[ ${TRAVIS_PHP_VERSION:0:1} == "7" ]] && vendor/bin/php-cs-fixer fix --diff --dry-run || echo "Skipping coding standards check"'
   - vendor/bin/psalm --show-info=true
   - vendor/bin/phpunit --coverage-text
