@@ -23,7 +23,7 @@
         "issues": "https://github.com/PHLAK/SemVer-CLI/issues"
     },
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.4",
         "composer/composer": "^2.0",
         "phlak/semver": "^3.2",
         "php-di/php-di": "^6.2",
