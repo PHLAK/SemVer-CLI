@@ -15,7 +15,7 @@ class AdapterFactoryTest extends TestCase
     /** @var InputInterface&MockObject */
     protected $input;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->input = $this->createMock(InputInterface::class);
     }

@@ -16,7 +16,7 @@ class TestCase extends PHPUnitTestCase
     protected Application $app;
     protected Container $container;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         chdir(self::DATA_DIR);
 

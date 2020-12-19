@@ -22,7 +22,7 @@ class ComposerAdapterTest extends TestCase
     /** @var ComposerAdapter */
     protected $adapter;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         chdir(self::DATA_DIR);
 
@@ -36,7 +36,7 @@ class ComposerAdapterTest extends TestCase
         $this->adapter = new ComposerAdapter($input);
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         $this->destroyComposer();
     }

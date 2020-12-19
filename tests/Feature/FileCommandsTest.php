@@ -39,14 +39,14 @@ class FileCommandsTest extends TestCase
     use Traits\SetsVersion;
     use Traits\UsesComposer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         putenv('SEMVER_CLI_ADAPTER=file');
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         foreach (['VERSION', '.version'] as $versionFile) {
             if (is_file($versionFile)) {
@@ -57,7 +57,8 @@ class FileCommandsTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_it_creates_a_version_file_when_initialized(): void
+    /** @test */
+    public function it_creates_a_version_file_when_initialized(): void
     {
         $command = new CommandTester($this->app->find('initialize'));
         $command->execute([]);
@@ -66,7 +67,8 @@ class FileCommandsTest extends TestCase
         $this->assertStringEqualsFile('VERSION', '0.1.0');
     }
 
-    public function test_it_can_override_the_version_file_name(): void
+    /** @test */
+    public function it_can_override_the_version_file_name(): void
     {
         $command = new CommandTester($this->app->find('initialize'));
         $command->execute(['--file' => '.version']);

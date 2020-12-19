@@ -40,7 +40,7 @@ class ComposerCommandsTest extends TestCase
     use Traits\SetsVersion;
     use Traits\UsesComposer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -48,14 +48,15 @@ class ComposerCommandsTest extends TestCase
         putenv('SEMVER_CLI_ADAPTER=composer');
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         $this->destroyComposer();
 
         parent::tearDown();
     }
 
-    public function test_it_fails_to_initialze_before_composer_is_initialized(): void
+    /** @test */
+    public function it_fails_to_initialze_before_composer_is_initialized(): void
     {
         $this->destroyComposer();
 

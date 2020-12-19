@@ -18,7 +18,7 @@ class FileAdapterTest extends TestCase
     /** @var FileAdapter */
     protected $adapter;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         chdir(self::DATA_DIR);
 
@@ -30,7 +30,7 @@ class FileAdapterTest extends TestCase
         $this->adapter = new FileAdapter($input);
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         foreach ([self::VERSION_FILE, '.version'] as $versionFile) {
             if (is_file($versionFile)) {
