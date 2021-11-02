@@ -6,10 +6,10 @@ use PHLAK\SemVer\Version;
 use PHLAK\SemVerCLI\Adapters\ComposerAdapter;
 use PHLAK\SemVerCLI\Exceptions\SemanticVersionException;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\Console\Input\InputInterface;
 use Tests\Traits;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 /** @covers \PHLAK\SemVerCLI\Adapters\ComposerAdapter */
 class ComposerAdapterTest extends TestCase

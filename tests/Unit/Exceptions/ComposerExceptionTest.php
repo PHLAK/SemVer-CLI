@@ -3,7 +3,7 @@
 namespace Tests\Unit\Exceptions;
 
 use PHLAK\SemVerCLI\Exceptions\ComposerException;
-use PHPUnit\Framework\TestCase;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 /** @covers \PHLAK\SemVerCLI\Exceptions\ComposerException */
 class ComposerExceptionTest extends TestCase

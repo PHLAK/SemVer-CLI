@@ -4,10 +4,10 @@ namespace Tests\Unit\Bootstrap;
 
 use PHLAK\SemVerCLI\Bootstrap\AppManager;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 /** @covers \PHLAK\SemVerCLI\Bootstrap\AppManager */
 class AppManagerTest extends TestCase

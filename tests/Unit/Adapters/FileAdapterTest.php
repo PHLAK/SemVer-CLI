@@ -6,8 +6,8 @@ use PHLAK\SemVer\Version;
 use PHLAK\SemVerCLI\Adapters\FileAdapter;
 use PHLAK\SemVerCLI\Exceptions\SemanticVersionException;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\InputInterface;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 /** @covers \PHLAK\SemVerCLI\Adapters\FileAdapter */
 class FileAdapterTest extends TestCase

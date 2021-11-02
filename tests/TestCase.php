@@ -5,11 +5,11 @@ namespace Tests;
 use DI\Container;
 use DI\ContainerBuilder;
 use PHLAK\SemVerCLI\Bootstrap\AppManager;
-use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 use RuntimeException;
 use Symfony\Component\Console\Application;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase as BaseTestCase;
 
-class TestCase extends PHPUnitTestCase
+class TestCase extends BaseTestCase
 {
     protected const DATA_DIR = __DIR__ . '/_data';
 

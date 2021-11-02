@@ -6,9 +6,9 @@ use PHLAK\SemVerCLI\Adapters\AdapterFactory;
 use PHLAK\SemVerCLI\Adapters\ComposerAdapter;
 use PHLAK\SemVerCLI\Adapters\FileAdapter;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 class AdapterFactoryTest extends TestCase
 {
