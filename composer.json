@@ -31,8 +31,7 @@
         "symfony/event-dispatcher": "^5.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.3",
-        "phlak/coding-standards": "^1.2",
+        "phlak/coding-standards": "^2.0",
         "phpunit/phpunit": "^8.0 || ^9.0",
         "psy/psysh": "^0.10.4",
         "symfony/var-dumper": "^5.1",
