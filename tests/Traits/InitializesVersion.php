@@ -47,7 +47,7 @@ trait InitializesVersion
 
         $this->assertEquals(Command::FAILURE, $command->getStatusCode());
         $this->assertEquals(
-            'Invalid Semantic Version string provided' . PHP_EOL,
+            'Invalid semantic version string provided' . PHP_EOL,
             $command->getDisplay()
         );
     }
