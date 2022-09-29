@@ -108,8 +108,8 @@ Alternately, you may set individual values.
 
 You may clear the `pre-release` or `build` values with the `clear` commands.
 
-    $ clear:build
-    $ clear:pre-release
+    $ semver clear:build
+    $ semver clear:pre-release
 
 #### Retrieving Values
 
