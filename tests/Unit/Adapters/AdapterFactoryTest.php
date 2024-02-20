@@ -37,11 +37,12 @@ class AdapterFactoryTest extends TestCase
     /** @test */
     public function it_can_return_a_composer_adapter(): void
     {
-        $this->input
-            ->expects($this->exactly(2))
-            ->method('getOption')
-            ->withConsecutive(['adapter'], ['composer'])
-            ->willReturnOnConsecutiveCalls('composer', 'compser.json');
+        $this->input->expects($this->exactly(2))->method('getOption')->willReturnCallback(
+            fn (string $option): string => match ($option) {
+                'adapter' => 'composer',
+                'composer' => 'composer.json',
+            }
+        );
 
         $adapter = AdapterFactory::make($this->input);
 

@@ -1,6 +1,6 @@
 /vendor/
+/.cache
 /.php-cs-fixer.cache
-/.phpunit.result.cache
 /composer.lock
 /semver.config.php
 /VERSION

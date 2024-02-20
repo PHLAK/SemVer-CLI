@@ -117,7 +117,7 @@ class ComposerAdapterTest extends TestCase
 
         $this->adapter->destroyVersion();
 
-        $this->assertObjectNotHasAttribute('version', $this->getComposer());
+        $this->assertObjectNotHasProperty('version', $this->getComposer());
     }
 
     /** Get the Composer object. */
